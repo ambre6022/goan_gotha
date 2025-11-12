@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Irrigation Control | Gaongotha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #1a7f4e;
+            --dark-green: #0d3b22;
+            --light-green: #e8f5e9;
+            --accent: #ff7a3d;
+            --white: #ffffff;
+            --light-gray: #f8faf9;
+            --dark-text: #1a2e22;
+            --sidebar-width: 250px;
+            --card-shadow: 0 10px 30px rgba(26, 127, 78, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-green);
+            color: white;
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 25px 30px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo img {
+            height: 36px;
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .page-title p {
+            color: var(--dark-text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            max-width: 600px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--light-green);
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        /* Irrigation Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(26, 127, 78, 0.2);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .card-header h2 {
+            font-size: 1.3rem;
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-header h2 i {
+            color: var(--accent);
+        }
+        
+        /* Moisture Monitoring */
+        .moisture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .moisture-card {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .moisture-location {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--dark-green);
+        }
+        
+        .moisture-value {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .moisture-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .status-optimal {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+        
+        .status-low {
+            background: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
+        }
+        
+        .status-critical {
+            background: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+        }
+        
+        /* Valve Control */
+        .valve-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .valve-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .valve-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .valve-name {
+            font-weight: 500;
+        }
+        
+        .valve-location {
+            font-size: 0.85rem;
+            color: var(--dark-text);
+            opacity: 0.7;
+        }
+        
+        .valve-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .valve-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .valve-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .valve-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .valve-slider {
+            background-color: var(--primary-green);
+        }
+        
+        input:checked + .valve-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Irrigation Schedule */
+        .schedule-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+        
+        .schedule-time {
+            font-weight: 600;
+            min-width: 80px;
+        }
+        
+        .schedule-zones {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .zone-tag {
+            background: var(--primary-green);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .schedule-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .action-btn:hover {
+            background: var(--light-green);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+        
+        /* Water Usage */
+        .water-usage-chart {
+            height: 200px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-text);
+            opacity: 0.7;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .action-card {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(26, 127, 78, 0.2);
+        }
+        
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.2rem;
+        }
+        
+        .action-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .logo span, .nav-link span {
+                display: none;
+            }
+            
+            .logo {
+                justify-content: center;
+                padding: 0 0 30px;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    {% include 'partials/sidebar.html' %}
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>Smart Irrigation Control</h1>
+                <p>Monitor soil conditions and control your irrigation system remotely</p>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">BC</div>
+                <span class="user-name">Baap Company</span>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="action-title">Start All Zones</div>
+                <div class="action-desc">Begin full irrigation</div>
+            </div>
+            
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-stop"></i>
+                </div>
+                <div class="action-title">Stop All Zones</div>
+                <div class="action-desc">Halt irrigation</div>
+            </div>
+            
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="action-title">Quick Water</div>
+                <div class="action-desc">15-min emergency water</div>
+            </div>
+            
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                </div>
+                <div class="action-title">New Schedule</div>
+                <div class="action-desc">Create irrigation plan</div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Soil Moisture Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-water"></i>Soil Moisture</h2>
+                    <div class="card-actions">
+                        <button class="action-btn">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="moisture-grid">
+                    <div class="moisture-card">
+                        <div class="moisture-location">Field A - North</div>
+                        <div class="moisture-value">72%</div>
+                        <div class="moisture-status status-optimal">Optimal</div>
+                    </div>
+                    
+                    <div class="moisture-card">
+                        <div class="moisture-location">Field A - South</div>
+                        <div class="moisture-value">68%</div>
+                        <div class="moisture-status status-optimal">Optimal</div>
+                    </div>
+                    
+                    <div class="moisture-card">
+                        <div class="moisture-location">Field B - East</div>
+                        <div class="moisture-value">42%</div>
+                        <div class="moisture-status status-low">Low</div>
+                    </div>
+                    
+                    <div class="moisture-card">
+                        <div class="moisture-location">Field B - West</div>
+                        <div class="moisture-value">35%</div>
+                        <div class="moisture-status status-critical">Critical</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Valve Control Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-faucet"></i>Valve Control</h2>
+                    <div class="card-actions">
+                        <button class="action-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="valve-control">
+                    <div class="valve-info">
+                        <div class="valve-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div>
+                            <div class="valve-name">Main Supply Line</div>
+                            <div class="valve-location">Entire Farm</div>
+                        </div>
+                    </div>
+                    <label class="valve-switch">
+                        <input type="checkbox" checked>
+                        <span class="valve-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="valve-control">
+                    <div class="valve-info">
+                        <div class="valve-icon" style="background: #FF9800;">
+                            <i class="fas fa-wheat"></i>
+                        </div>
+                        <div>
+                            <div class="valve-name">Zone 1 - Wheat Field</div>
+                            <div class="valve-location">North Section</div>
+                        </div>
+                    </div>
+                    <label class="valve-switch">
+                        <input type="checkbox">
+                        <span class="valve-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="valve-control">
+                    <div class="valve-info">
+                        <div class="valve-icon" style="background: #4CAF50;">
+                            <i class="fas fa-carrot"></i>
+                        </div>
+                        <div>
+                            <div class="valve-name">Zone 2 - Vegetables</div>
+                            <div class="valve-location">East Section</div>
+                        </div>
+                    </div>
+                    <label class="valve-switch">
+                        <input type="checkbox" checked>
+                        <span class="valve-slider"></span>
+                    </label>
+                </div>
+                
+                <div class="valve-control">
+                    <div class="valve-info">
+                        <div class="valve-icon" style="background: #9C27B0;">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <div>
+                            <div class="valve-name">Zone 3 - Orchard</div>
+                            <div class="valve-location">West Section</div>
+                        </div>
+                    </div>
+                    <label class="valve-switch">
+                        <input type="checkbox">
+                        <span class="valve-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Irrigation Schedule -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-alt"></i>Schedule</h2>
+                    <div class="card-actions">
+                        <button class="action-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="schedule-list">
+                    <div class="schedule-item">
+                        <div class="schedule-time">06:00 AM</div>
+                        <div class="schedule-zones">
+                            <span class="zone-tag">Zone 1</span>
+                            <span class="zone-tag">Zone 2</span>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="action-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-item">
+                        <div class="schedule-time">03:00 PM</div>
+                        <div class="schedule-zones">
+                            <span class="zone-tag">Zone 3</span>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="action-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-item">
+                        <div class="schedule-time">08:00 PM</div>
+                        <div class="schedule-zones">
+                            <span class="zone-tag">Zone 2</span>
+                        </div>
+                        <div class="schedule-actions">
+                            <button class="action-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Water Usage -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-line"></i>Water Usage</h2>
+                    <div class="card-actions">
+                        <select style="padding: 5px; border-radius: 5px; border: 1px solid #ddd; background: var(--light-gray);">
+                            <option>Today</option>
+                            <option selected>This Week</option>
+                            <option>This Month</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="water-usage-chart">
+                    [Water Usage Chart Visualization]
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary-green);">12,560L</div>
+                        <div style="font-size: 0.8rem;">Total Usage</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 600; color: #4CAF50;">18% &#8595;</div>
+                        <div style="font-size: 0.8rem;">Savings</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div
+                        <div style="font-size: 0.8rem;">Savings</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 600; color: var(--accent);">92%</div>
+                        <div style="font-size: 0.8rem;">Efficiency</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

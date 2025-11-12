@@ -1,0 +1,64 @@
+﻿{% set current_page = active_page|default('') %}
+{% set nav_user_id = user_id if user_id is defined else (current_user_id if current_user_id is defined else None) %}
+<aside class="sidebar">
+    <a class="logo" href="{{ url_for('dashboard', user_id=nav_user_id) if nav_user_id else '#' }}">
+        <img src="https://cdn-icons-png.flaticon.com/512/3079/3079165.png" alt="Gaongotha Logo">
+        <span>Gaongotha</span>
+    </a>
+    <ul class="nav-menu">
+        <li class="nav-item">
+            <a href="{{ url_for('dashboard', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'dashboard' %}active{% endif %}">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('cattle_management', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'cattle' %}active{% endif %}">
+                <i class="fas fa-cow"></i>
+                <span>Cattle Management</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('agro_intelligence', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'agro' %}active{% endif %}">
+                <i class="fas fa-satellite"></i>
+                <span>Agro Intelligence</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('financial_hub', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'financial' %}active{% endif %}">
+                <i class="fas fa-rupee-sign"></i>
+                <span>Financial Hub</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('marketplace', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'marketplace' %}active{% endif %}">
+                <i class="fas fa-store"></i>
+                <span>Marketplace</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('crop_advisor', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'crop' %}active{% endif %}">
+                <i class="fas fa-seedling"></i>
+                <span>Crop Advisor</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('irrigation', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'irrigation' %}active{% endif %}">
+                <i class="fas fa-water"></i>
+                <span>Irrigation Control</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('predict_chara', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'fodder' %}active{% endif %}">
+                <i class="fas fa-leaf"></i>
+                <span>Fodder Forecast</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url_for('setting', user_id=nav_user_id) if nav_user_id else '#' }}" class="nav-link {% if current_page == 'settings' %}active{% endif %}">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+    </ul>
+</aside>

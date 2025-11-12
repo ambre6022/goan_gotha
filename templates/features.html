@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Features | Gaongotha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Marcellus&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2f855a;
+            --primary-light: #48bb78;
+            --primary-dark: #276749;
+            --secondary: #f6e05e;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --glass: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://images.pexels.com/photos/12866869/pexels-photo-12866869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+            background-attachment: fixed;
+            color: var(--light);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+       
+        /* Glassmorphism Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(47, 133, 90, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74, 192, 86, 0.419);
+            z-index: 100;
+        }
+       
+        .logo {
+            font-family: 'Marcellus', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--light);
+            letter-spacing: 1px;
+        }
+       
+        .logo span {
+            color: var(--secondary);
+        }
+       
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+       
+        .nav-btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+       
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+       
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+       
+        .page-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-family: 'Marcellus', serif;
+            font-size: 2.8rem;
+            color: var(--secondary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+       
+        .page-subtitle {
+            text-align: center;
+            margin-bottom: 5rem;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+       
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+       
+        /* Glassmorphism Card */
+        .card {
+            background: rgba(47, 133, 90, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(26, 231, 7, 0.488);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            min-height: 400px;
+        }
+       
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+       
+        /* Card Background Images */
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.4;
+        }
+       
+        /* Card 1 - Cattle Management */
+        .card-cattle {
+            background: linear-gradient(135deg, rgba(43, 224, 2, 0.2), rgba(6, 234, 40, 0.2));
+        }
+       
+        /* Card 2 - Agro Intelligence */
+        .card-agro {
+            background: linear-gradient(135deg, rgba(56, 161, 105, 0.2), rgba(72, 187, 120, 0.2));
+        }
+       
+        /* Card 3 - Financial Hub */
+        .card-finance {
+            background: linear-gradient(135deg, rgba(39, 103, 73, 0.2), rgba(47, 133, 90, 0.2));
+        }
+       
+        /* Card 4 - Marketplace */
+        .card-market {
+            background: linear-gradient(135deg, rgba(72, 187, 120, 0.2), rgba(102, 217, 150, 0.2));
+        }
+       
+        .card-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid rgba(72, 187, 120, 0.2);
+        }
+       
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+       
+        .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Marcellus', serif;
+        }
+       
+        .card-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+       
+        .card-body {
+            padding: 1.5rem 2rem;
+        }
+       
+        .card-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+       
+        .card-features li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+       
+        .card-features li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+       
+        .card-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: rgba(47, 133, 90, 0.3);
+            backdrop-filter: blur(5px);
+            color: var(--light);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(72, 187, 120, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+       
+        .card-btn:hover {
+            background: rgba(72, 187, 120, 0.4);
+            transform: translateY(-2px);
+        }
+       
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 4rem;
+            padding: 1.5rem;
+            background: rgba(47, 133, 90, 0.3);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            border: 1px solid rgba(72, 187, 120, 0.3);
+        }
+       
+        .stat-item {
+            text-align: center;
+        }
+       
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+       
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+       
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+       
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1.2rem;
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+           
+            .container {
+                padding: 7rem 1.5rem 3rem;
+            }
+           
+            .page-title {
+                font-size: 2.2rem;
+                margin-bottom: 2.5rem;
+            }
+           
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .stats-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Glassmorphism Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <span>Gaon</span>Gotha
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-btn"><i class="fas fa-user"></i> Farmer Profile</a>
+        </div>
+    </nav>
+   
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title">Farmer Intelligence Dashboard</h1>
+        <p class="page-subtitle">Comprehensive cattle management and agricultural solutions powered by AI and IoT technology</p>
+       
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <!-- Card 1: Cattle Management -->
+            <div class="card card-cattle">
+                <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cattle" class="card-bg">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-cow"></i>
+                    </div>
+                    <h2 class="card-title">Cattle Management</h2>
+                    <p class="card-subtitle">Smart monitoring for healthier livestock</p>
+                </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li>Real-time health monitoring</li>
+                        <li>Breeding cycle tracking</li>
+                        <li>Milk production analytics</li>
+                        <li>Vaccination reminders</li>
+                        <li>IoT-enabled wearables</li>
+                    </ul>
+                    <a href="{{ url_for('dashboard', user_id=session['user_id']) }}" class="card-btn">Access Cattle Hub</a>
+
+                </div>
+            </div>
+           
+            <!-- Card 2: Agro Intelligence -->
+            <div class="card card-agro">
+                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Farm" class="card-bg">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h2 class="card-title">Agro Intelligence</h2>
+                    <p class="card-subtitle">Data-driven farming decisions</p>
+                </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li>Precision agriculture tools</li>
+                        <li>Soil health analysis</li>
+                        <li>Weather prediction models</li>
+                        <li>Crop rotation planner</li>
+                        <li>Government scheme alerts</li>
+                    </ul>
+                    <a href="#" class="card-btn">Explore Agro Tools</a>
+                </div>
+            </div>
+           
+            <!-- Card 3: Financial Hub -->
+            <div class="card card-finance">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Finance" class="card-bg">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h2 class="card-title">Financial Hub</h2>
+                    <p class="card-subtitle">Smart money management</p>
+                </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li>Expense tracking</li>
+                        <li>Profit/loss analysis</li>
+                        <li>Loan eligibility checker</li>
+                        <li>Market price trends</li>
+                        <li>Investment recommendations</li>
+                    </ul>
+                    <a href="#" class="card-btn">View Finances</a>
+                </div>
+            </div>
+           
+            <!-- Card 4: Marketplace -->
+            <div class="card card-market">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Market" class="card-bg">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h2 class="card-title">Farmer's Marketplace</h2>
+                    <p class="card-subtitle">Connect, buy & sell</p>
+                </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li>Cattle trading platform</li>
+                        <li>Farm produce marketplace</li>
+                        <li>Equipment rentals</li>
+                        <li>Cattle feed suppliers</li>
+                        <li>Verified buyers network</li>
+                    </ul>
+                    <a href="#" class="card-btn">Enter Marketplace</a>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">5,000+</div>
+                <div class="stat-label">Farmers Connected</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">92%</div>
+                <div class="stat-label">Healthier Cattle</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">&#8377;2.4Cr</div>
+                <div class="stat-label">Market Transactions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Veterinary Support</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

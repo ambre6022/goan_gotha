@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Add New Cattle | Gaongotha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #1a7f4e;
+            --dark-green: #0d3b22;
+            --light-green: #e8f5e9;
+            --accent: #ff7a3d;
+            --white: #ffffff;
+            --light-gray: #f8faf9;
+            --dark-text: #1a2e22;
+            --card-shadow: 0 10px 30px rgba(26, 127, 78, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--dark-green);
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary-green);
+            outline: none;
+        }
+        
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ddd;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary-green);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Photo Upload */
+        .photo-upload {
+            border: 1px dashed #ddd;
+            padding: 25px;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .photo-upload:hover {
+            border-color: var(--primary-green);
+            background: rgba(26, 127, 78, 0.05);
+        }
+        
+        .photo-upload i {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .photo-upload p {
+            margin: 0;
+            color: var(--dark-text);
+            opacity: 0.8;
+        }
+        
+        .photo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Form Buttons */
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-green);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(26, 127, 78, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>Add New Animal</h1>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form method="POST" action="{{ url_for('register_animal') }}" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="type">Animal Type</label>
+                    <select class="form-control" name="type" id="type" onchange="updateFormFields()" required>
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="Cow">Cow</option>
+                        <option value="Buffalo">Buffalo</option>
+                        <option value="Goat">Goat</option>
+                        <option value="Sheep">Sheep</option>
+                        <option value="Ox">Ox</option>
+                        <option value="Cock">Rooster</option>
+                        <option value="Hen">Hen</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <select class="form-control" id="animal_name" name="name" onchange="handleNameChange()" required>
+                        <option value="" disabled selected>Select Name</option>
+                        <option value="other">Other (Enter manually)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group hidden" id="custom_name_div">
+                    <label for="custom_name">Custom Name</label>
+                    <input type="text" class="form-control" id="custom_name" name="name" placeholder="Type custom name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="breed">Breed</label>
+                    <select class="form-control" name="breed" id="breed" required>
+                        <option value="" disabled selected>Select animal type first</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" class="form-control" id="weight" name="weight" placeholder="Enter weight in kilograms" step="0.1" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age (months)</label>
+                    <input type="number" class="form-control" id="age" name="age" placeholder="Enter age in months" min="1" required>
+                </div>
+                
+                <div class="form-group hidden" id="ox_purpose_div">
+                    <label for="use_purpose">Usage for Ox</label>
+                    <select class="form-control" name="use_purpose" id="use_purpose" onchange="handleUsePurposeChange()">
+                        <option value="" disabled selected>Select Use</option>
+                        <option value="Farming">For Farming</option>
+                        <option value="Racing">For Racing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group hidden" id="custom_use_purpose_div">
+                    <label for="custom_use_purpose">Other Use</label>
+                    <input type="text" class="form-control" name="custom_use_purpose" id="custom_use_purpose" placeholder="Type other use">
+                </div>
+                
+                <div class="form-group hidden" id="milk_production_div">
+                    <label for="milk_production">Milk Production (liters/day)</label>
+                    <input type="number" name="milk_production" name="milk_production" id="milk_production" placeholder="Milk production capacity" step="0.1">
+                </div>
+                
+                <div class="form-group hidden" id="pregnancy_div">
+                    <label for="pregnancy_cycle">Pregnancy Cycle (months)</label>
+                    <input type="number" name="pregnancy_cycle" name="pregnancy_cycle" id="pregnancy_cycle" placeholder="Pregnancy cycle duration" min="0">
+                </div>
+                
+                <div class="form-group hidden" id="egg_production_div">
+                    <label>Does it lay eggs?</label>
+                    <div class="toggle-container">
+                        <span>No</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" name="is_laying_eggs" id="is_laying_eggs" value="yes">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span>Yes</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Does it have horns?</label>
+                    <div class="toggle-container">
+                        <span>No</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" name="has_horns" id="has_horns" value="yes">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span>Yes</span>
+                    </div>
+                </div>
+                
+                <div class="form-group hidden" id="cow_category_div">
+                    <label for="cow_category">Cow Category</label>
+                    <select class="form-control" name="cow_category" id="cow_category">
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="Pregnant">Pregnant</option>
+                        <option value="Milking">Lactating</option>
+                        <option value="Dry">Dry</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="photo">Photo</label>
+                    <div class="photo-upload" onclick="document.getElementById('photo').click()">
+                        <i class="fas fa-camera"></i>
+                        <p>Click to upload photo</p>
+                        <input type="file" name="photo" id="photo" accept="image/*" style="display:none;" onchange="previewPhoto(event)">
+                        <img id="photoPreview" class="photo-preview" alt="Photo preview">
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-outline" onclick="resetForm()">Reset</button>
+                    <button type="submit" class="btn btn-primary">Add Animal</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/csrf.js') }}"></script>
+    <script>
+        // Animal names list - Traditional Marathi names
+        const animalNames = {
+            Cow: ["Kapila", "Lakshmi", "Gauri", "Suman", "Radha"],
+            Buffalo: ["Mohini", "Parvati", "Kali", "Ganga"],
+            Goat: ["Meena", "Chanda", "Malati"],
+            Sheep: ["Jhanak", "Jhunjhun"],
+            Ox: ["Shiva", "Balaram", "Hemant"],
+            Cock: ["Raja", "Sheru", "Mohan"],
+            Hen: ["Rani", "Lakshmi", "Ganga"],
+            Other: ["Generic"]
+        };
+
+        // Breed options by animal type with Marathi names
+        const breedOptions = {
+            Cow: ["Gir", "Sahiwal", "Jersey", "Holstein"],
+            Buffalo: ["Murrah", "Jaffarabadi", "Surti"],
+            Goat: ["Boer", "Black Bengal", "Jamunapari"],
+            Sheep: ["Deccani", "Nellore"],
+            Ox: ["Jiva", "Sonya", ""],
+            Cock: ["Kadaknath", "Aseel", "Rhode Island Red"],
+            Hen: ["Kadaknath", "Aseel", "Rhode Island Red", "Leghorn"],
+            Other: ["Hybrid"]
+        };
+
+        function handleUsePurposeChange() {
+            var usePurpose = document.getElementById("use_purpose").value;
+            var customDiv = document.getElementById("custom_use_purpose_div");
+            if (usePurpose === "Other") {
+                customDiv.classList.remove("hidden");
+            } else {
+                customDiv.classList.add("hidden");
+            }
+        }
+
+        function updateFormFields() {
+            var type = document.getElementById("type").value;
+            
+            // Show/hide ox purpose section
+            var oxPurposeDiv = document.getElementById("ox_purpose_div");
+            if (type === "Ox") {
+                oxPurposeDiv.classList.remove("hidden");
+            } else {
+                oxPurposeDiv.classList.add("hidden");
+                document.getElementById("custom_use_purpose_div").classList.add("hidden");
+            }
+
+            // Show/hide egg production for hens
+            var eggDiv = document.getElementById("egg_production_div");
+            if (type === "Hen") {
+                eggDiv.classList.remove("hidden");
+            } else {
+                eggDiv.classList.add("hidden");
+            }
+
+            const breedSelect = document.getElementById('breed');
+            const nameSelect = document.getElementById('animal_name');
+            const cowCategoryDiv = document.getElementById('cow_category_div');
+            const milkDiv = document.getElementById("milk_production_div");
+            const pregnancyDiv = document.getElementById("pregnancy_div");
+
+            // Update breeds
+            breedSelect.innerHTML = '<option value="" disabled selected>Select breed</option>';
+            if (breedOptions[type]) {
+                breedOptions[type].forEach(function(breed) {
+                    const option = document.createElement('option');
+                    option.value = breed;
+                    option.text = breed;
+                    breedSelect.appendChild(option);
+                });
+            }
+
+            // Update names
+            nameSelect.innerHTML = '<option value="" disabled selected>Select name</option>';
+            if (animalNames[type]) {
+                animalNames[type].forEach(function(name) {
+                    const option = document.createElement('option');
+                    option.value = name;
+                    option.text = name;
+                    nameSelect.appendChild(option);
+                });
+            }
+            nameSelect.innerHTML += '<option value="other">Other (Type your own)</option>';
+
+            // Manage other fields
+            if (type === "Cow") {
+                cowCategoryDiv.classList.remove("hidden");
+                milkDiv.classList.remove("hidden");
+                pregnancyDiv.classList.remove("hidden");
+            } else if (type === "Buffalo") {
+                cowCategoryDiv.classList.add("hidden");
+                milkDiv.classList.add("hidden");
+                pregnancyDiv.classList.remove("hidden");
+            } else if (type === "Ox") {
+                cowCategoryDiv.classList.add("hidden");
+                milkDiv.classList.add("hidden");
+                pregnancyDiv.classList.add("hidden");
+            } else if (type === "Goat" || type === "Sheep") {
+                cowCategoryDiv.classList.add("hidden");
+                milkDiv.classList.add("hidden");
+                pregnancyDiv.classList.add("hidden");
+            } else if (type === "Cock" || type === "Hen") {
+                cowCategoryDiv.classList.add("hidden");
+                milkDiv.classList.add("hidden");
+                pregnancyDiv.classList.add("hidden");
+            } else {
+                // Default for others
+                cowCategoryDiv.classList.add("hidden");
+                milkDiv.classList.add("hidden");
+                pregnancyDiv.classList.add("hidden");
+            }
+        }
+
+        function handleNameChange() {
+            const animalName = document.getElementById("animal_name").value;
+            const customNameDiv = document.getElementById("custom_name_div");
+
+            if (animalName === "other") {
+                customNameDiv.classList.remove("hidden");
+            } else {
+                customNameDiv.classList.add("hidden");
+            }
+        }
+
+        function previewPhoto(event) {
+            const input = event.target;
+            const preview = document.getElementById('photoPreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('animalForm').reset();
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('custom_name_div').classList.add('hidden');
+            document.getElementById('custom_use_purpose_div').classList.add('hidden');
+            updateFormFields();
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            updateFormFields();
+
+             // Form validation
+            document.getElementById('animalForm').addEventListener('submit', function(e) {
+                const type = document.getElementById('type').value;
+                const name = document.getElementById('animal_name').value;
+                const customName = document.getElementById('custom_name').value;
+                const breed = document.getElementById('breed').value;
+                const age = document.getElementById('age').value;
+                const weight = document.getElementById('weight').value;
+                const milkProduction = document.getElementById('milk_production').value;
+                const pregnancyCycle = document.getElementById('pregnancy_cycle').value;
+                
+                // Basic validation messages
+                if (!type) {
+                    e.preventDefault();
+                    alert('Please select an animal type');
+                    return;
+                }
+                
+                if (!name || (name === 'other' && !customName)) {
+                    e.preventDefault();
+                    alert('Please enter the animal name');
+                    return;
+                }
+                
+                if (!breed) {
+                    e.preventDefault();
+                    alert('Please select the animal breed');
+                    return;
+                }
+                
+                if (!age || age <= 0 || age > 300) {
+                    e.preventDefault();
+                    alert('Please enter age between 1 and 300 months');
+                    return;
+                }
+                
+                if (weight && (weight <= 0 || weight > 2000)) {
+                    e.preventDefault();
+                    alert('Please enter weight between 0 and 2000 kilograms');
+                    return;
+                }
+                
+                // Type-specific validations
+                if (type === 'Cow' && !document.getElementById('cow_category').value) {
+                    e.preventDefault();
+                    alert('Please select the cow category');
+                    return;
+                }
+                
+                if (type === 'Ox' && !document.getElementById('use_purpose').value) {
+                    e.preventDefault();
+                    alert('Please select how the bull is used');
+                    return;
+                }
+                
+                if (milkProduction && (milkProduction < 0 || milkProduction > 100)) {
+                    e.preventDefault();
+                    alert('Please enter milk production between 0 and 100 liters');
+                    return;
+                }
+                
+                if (pregnancyCycle && (pregnancyCycle < 0 || pregnancyCycle > 12)) {
+                    e.preventDefault();
+                    alert('Please enter pregnancy duration between 0 and 12 months');
+                    return;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

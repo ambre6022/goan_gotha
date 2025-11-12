@@ -1,0 +1,530 @@
+2025-04-29 13:04:33,920 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 13:04:33,935 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 13:04:33,937 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 13:05:00,013 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:10:00 IST)" (scheduled at 2025-04-29 13:05:00+05:30)
+2025-04-29 13:05:00,027 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:10:00 IST)" executed successfully
+2025-04-29 13:10:00,007 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:15:00 IST)" (scheduled at 2025-04-29 13:10:00+05:30)
+2025-04-29 13:10:00,019 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:15:00 IST)" executed successfully
+2025-04-29 13:15:00,009 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:20:00 IST)" (scheduled at 2025-04-29 13:15:00+05:30)
+2025-04-29 13:15:00,012 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:20:00 IST)" executed successfully
+2025-04-29 13:20:00,014 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:25:00 IST)" (scheduled at 2025-04-29 13:20:00+05:30)
+2025-04-29 13:20:00,017 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 13:25:00 IST)" executed successfully
+2025-04-29 14:02:01,305 - apscheduler.executors.default - WARNING - Run time of job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 14:05:00 IST)" was missed by 0:02:01.304192
+2025-04-29 17:43:37,028 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,028 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,032 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,032 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,033 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,033 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,039 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:37,039 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:37,040 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:37,040 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:37,041 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:37,041 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:37,042 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:37,042 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:37,157 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,157 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,159 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,159 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,160 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,160 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:37,162 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:37,162 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:37,164 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:37,164 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:37,165 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:37,165 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:37,170 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:37,170 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:38,428 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,428 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,429 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,429 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,430 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,430 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,432 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:38,432 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:38,433 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:38,433 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:38,435 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:38,435 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:38,437 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:38,437 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:38,462 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,462 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,463 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,463 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,465 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,465 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:38,466 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:38,466 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:38,466 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:38,466 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:38,467 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:38,467 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:38,468 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:38,468 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:49,905 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:49,905 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:49,908 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:49,908 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:49,923 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:49,923 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:49,940 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:49,940 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:49,948 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:49,948 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:49,949 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:49,949 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:49,958 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:49,958 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:50,017 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:50,017 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:50,018 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:50,018 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:50,021 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:50,021 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:50,023 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:50,023 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:50,037 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:50,037 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:50,038 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:50,038 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:50,039 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:50,039 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:52,277 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,277 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,278 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,278 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,279 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,279 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,280 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:52,280 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:52,280 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:52,280 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:52,281 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:52,281 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:52,281 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:52,281 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:52,296 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,296 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,297 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,297 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,298 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,298 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:43:52,298 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:52,298 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:43:52,299 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:52,299 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:43:52,299 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:52,299 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:43:52,300 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:43:52,300 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:45:00,012 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" (scheduled at 2025-04-29 17:45:00+05:30)
+2025-04-29 17:45:00,012 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" (scheduled at 2025-04-29 17:45:00+05:30)
+2025-04-29 17:45:00,012 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" (scheduled at 2025-04-29 17:45:00+05:30)
+2025-04-29 17:45:00,016 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" (scheduled at 2025-04-29 17:45:00+05:30)
+2025-04-29 17:45:00,016 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" (scheduled at 2025-04-29 17:45:00+05:30)
+2025-04-29 17:45:00,271 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:00,271 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:00,272 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:00,271 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:00,272 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:00,278 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:00,278 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:50:00 IST)" executed successfully
+2025-04-29 17:45:08,957 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:08,957 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:08,961 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:08,961 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:08,964 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:08,964 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:08,967 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:45:08,967 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:45:08,968 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:45:08,968 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:45:08,972 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:45:08,972 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:45:08,976 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:45:08,976 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:45:09,003 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:09,003 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:09,009 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:09,009 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:09,014 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:09,014 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:45:09,017 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:45:09,017 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:45:09,023 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:45:09,023 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:45:09,028 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:45:09,028 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:45:09,036 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:45:09,036 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:46:16,463 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,463 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,466 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,466 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,473 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,473 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,478 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:46:16,478 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:46:16,481 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:46:16,481 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:46:16,483 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:46:16,483 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:46:16,494 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:46:16,494 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:46:16,512 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,512 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,514 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,514 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,517 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,517 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:46:16,527 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:46:16,527 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:46:16,529 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:46:16,529 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:46:16,530 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:46:16,530 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:46:16,533 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:46:16,533 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:50:00,012 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,012 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,012 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,014 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,014 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,017 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,017 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" (scheduled at 2025-04-29 17:50:00+05:30)
+2025-04-29 17:50:00,026 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,026 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,027 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,027 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,027 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,027 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,028 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:50:00,028 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 17:55:00 IST)" executed successfully
+2025-04-29 17:54:57,528 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,528 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,529 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,529 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,531 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,531 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,532 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:54:57,532 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:54:57,534 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:54:57,534 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:54:57,536 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:54:57,536 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:54:57,537 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:54:57,537 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:54:57,558 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,558 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,559 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,559 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,560 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,560 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:54:57,561 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:54:57,561 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:54:57,562 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:54:57,562 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:54:57,563 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:54:57,563 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:54:57,563 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:54:57,563 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:55:00,009 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,009 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,009 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,009 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,018 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,018 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,030 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,030 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" (scheduled at 2025-04-29 17:55:00+05:30)
+2025-04-29 17:55:00,054 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,054 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,058 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,058 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,060 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,060 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,061 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:55:00,061 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 18:00:00 IST)" executed successfully
+2025-04-29 17:58:15,270 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,270 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,327 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,327 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,330 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,330 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,334 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:15,334 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:15,354 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:15,354 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:15,366 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:15,366 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:15,368 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:15,368 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:15,390 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,390 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,395 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,395 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,396 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,396 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:15,397 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:15,397 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:15,398 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:15,398 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:15,399 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:15,399 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:15,400 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:15,400 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:35,672 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,672 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,678 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,678 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,686 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,686 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,688 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:35,688 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:35,689 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:35,689 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:35,690 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:35,690 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:35,690 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:35,690 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:35,710 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,710 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,711 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,711 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,717 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,717 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 17:58:35,719 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:35,719 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 17:58:35,719 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:35,719 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 17:58:35,720 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:35,720 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 17:58:35,721 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 17:58:35,721 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:52:51,200 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,202 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,203 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,207 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:52:51,209 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:52:51,210 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:52:51,210 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:52:51,233 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,233 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,234 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,234 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,235 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,235 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:52:51,235 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:52:51,235 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:52:51,236 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:52:51,236 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:52:51,236 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:52:51,236 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:52:51,237 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:52:51,237 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:53:41,643 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,653 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,655 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,657 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:53:41,659 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:53:41,661 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:53:41,663 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:53:41,798 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,798 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,818 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,818 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,829 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,829 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:41,831 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:53:41,831 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:53:41,839 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:53:41,839 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:53:41,841 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:53:41,841 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:53:41,844 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:53:41,844 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:53:46,608 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,609 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,610 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,611 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:53:46,611 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:53:46,612 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:53:46,612 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:53:46,629 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,629 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,630 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,630 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,631 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,631 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:53:46,638 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:53:46,638 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:53:46,639 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:53:46,639 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:53:46,640 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:53:46,640 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:53:46,640 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:53:46,640 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:55:00,013 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,013 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,014 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,014 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,015 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,015 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,016 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,016 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" (scheduled at 2025-04-29 22:55:00+05:30)
+2025-04-29 22:55:00,020 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,020 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,021 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,021 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,021 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,021 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,029 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:55:00,029 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:00:00 IST)" executed successfully
+2025-04-29 22:56:15,904 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,904 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,907 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,913 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:56:15,916 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:56:15,917 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:56:15,917 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:56:15,954 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,954 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,962 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,962 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,967 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,967 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:15,969 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:56:15,969 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:56:15,970 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:56:15,970 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:56:15,982 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:56:15,982 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:56:15,985 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:56:15,985 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:56:18,224 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,227 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,230 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,259 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:56:18,275 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:56:18,407 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:56:18,492 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:56:18,614 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,614 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,625 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,625 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,626 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,626 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 22:56:18,628 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:56:18,628 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 22:56:18,629 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:56:18,629 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 22:56:18,642 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:56:18,642 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 22:56:18,644 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 22:56:18,644 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 23:00:00,014 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,016 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,016 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,017 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,021 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,020 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,024 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,024 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,036 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,036 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,039 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,039 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" (scheduled at 2025-04-29 23:00:00+05:30)
+2025-04-29 23:00:00,066 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,066 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,069 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,069 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,072 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,072 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,078 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,078 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,080 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,080 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,082 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,082 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,082 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,082 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,083 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:00:00,083 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:05:00 IST)" executed successfully
+2025-04-29 23:05:00,086 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,086 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,094 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,101 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,101 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,104 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,094 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,104 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,107 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,107 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,127 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,127 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,172 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,172 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,167 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,167 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,184 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,184 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,202 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,202 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,208 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,208 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,154 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,225 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,225 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,154 - apscheduler.executors.default - INFO - Running job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" (scheduled at 2025-04-29 23:05:00+05:30)
+2025-04-29 23:05:00,237 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,237 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,311 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,311 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,322 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:05:00,322 - apscheduler.executors.default - INFO - Job "health_monitor (trigger: cron[minute='*/5'], next run at: 2025-04-29 23:10:00 IST)" executed successfully
+2025-04-29 23:06:12,786 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,791 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,794 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,804 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 23:06:12,811 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 23:06:12,826 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 23:06:12,831 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 23:06:12,978 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,978 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,985 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,985 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,993 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:12,993 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:06:13,001 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 23:06:13,001 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 23:06:13,007 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 23:06:13,007 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 23:06:13,017 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 23:06:13,017 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 23:06:13,032 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 23:06:13,032 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 23:08:26,393 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,473 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,511 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,595 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 23:08:26,596 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 23:08:26,598 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 23:08:26,599 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 23:08:26,632 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,632 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,651 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,651 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,659 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,659 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-04-29 23:08:26,692 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 23:08:26,692 - apscheduler.scheduler - INFO - Added job "health_monitor" to job store "default"
+2025-04-29 23:08:26,701 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 23:08:26,701 - apscheduler.scheduler - INFO - Added job "vaccination_checker" to job store "default"
+2025-04-29 23:08:26,767 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 23:08:26,767 - apscheduler.scheduler - INFO - Added job "milk_monitor" to job store "default"
+2025-04-29 23:08:26,815 - apscheduler.scheduler - INFO - Scheduler started
+2025-04-29 23:08:26,815 - apscheduler.scheduler - INFO - Scheduler started

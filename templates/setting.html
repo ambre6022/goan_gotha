@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Settings | Gaongotha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #1a7f4e;
+            --dark-green: #0d3b22;
+            --light-green: #e8f5e9;
+            --accent: #ff7a3d;
+            --white: #ffffff;
+            --light-gray: #f8faf9;
+            --dark-text: #1a2e22;
+            --sidebar-width: 250px;
+            --card-shadow: 0 10px 30px rgba(26, 127, 78, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-green);
+            color: white;
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 25px 30px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo img {
+            height: 36px;
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--light-green);
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        /* Settings Content */
+        .setting-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        
+        .setting-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            height: fit-content;
+        }
+        
+        .setting-nav {
+            list-style: none;
+        }
+        
+        .setting-nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .setting-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--dark-text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .setting-nav-link:hover, .setting-nav-link.active {
+            background: var(--light-green);
+            color: var(--dark-green);
+        }
+        
+        .setting-nav-link i {
+            width: 24px;
+            text-align: center;
+            color: var(--primary-green);
+        }
+        
+        .settings-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .settings-section {
+            margin-bottom: 40px;
+        }
+        
+        .settings-section h2 {
+            font-size: 1.4rem;
+            color: var(--dark-green);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .settings-section h2 i {
+            color: var(--accent);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-green);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(26, 127, 78, 0.3);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.2);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-green);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .toggle-label {
+            font-size: 0.95rem;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+        }
+        
+        .btn-outline:hover {
+            background: var(--light-green);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .settings-sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    {% include 'partials/sidebar.html' %}
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>Account Setting</h1>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">BC</div>
+                <span class="user-name">Baap Company</span>
+            </div>
+        </div>
+        
+        <div class="setting-container">
+            <!-- Setting Sidebar -->
+            <div class="setting-sidebar">
+                <ul class="setting-nav">
+                    <li class="setting-nav-item">
+                        <a href="#" class="setting-nav-link active">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="setting-nav-item">
+                        <a href="#" class="setting-nav-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security</span>
+                        </a>
+                    </li>
+                    <li class="setting-nav-item">
+                        <a href="#" class="setting-nav-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li class="setting-nav-item">
+                        <a href="#" class="setting-nav-link">
+                            <i class="fas fa-tractor"></i>
+                            <span>Farm Setting</span>
+                        </a>
+                    </li>
+                    <li class="setting-nav-item">
+                        <a href="#" class="setting-nav-link">
+                            <i class="fas fa-plug"></i>
+                            <span>Integrations</span>
+                        </a>
+                    </li>
+                    <li class="setting-nav-item">
+                        <a href="#" class="setting-nav-link">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Billing</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Section -->
+                <div class="settings-section">
+                    <h2><i class="fas fa-user"></i>Profile Information</h2>
+                    
+                    <div class="form-group">
+                        <label>Profile Photo</label>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div class="user-avatar" style="width: 80px; height: 80px; font-size: 1.8rem;">BC</div>
+                            <div>
+                                <button class="btn btn-outline">Change Photo</button>
+                                <button class="btn btn-outline" style="margin-left: 10px;">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" value="Baap">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" value="Company">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="baap@company.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" value="9876543210">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" rows="4">Organic farmer with 50 acres of land specializing in dairy and vegetable farming.</textarea>
+                    </div>
+                </div>
+                
+                <!-- Farm Information Section -->
+                <div class="settings-section">
+                    <h2><i class="fas fa-tractor"></i>Farm Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="farm-name">Farm Name</label>
+                        <input type="text" id="farm-name" value="Baap Farms">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="farm-size">Farm Size (acres)</label>
+                            <input type="number" id="farm-size" value="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="farm-location">Location</label>
+                            <input type="text" id="farm-location" value="Pune, Maharashtra">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="primary-crop">Primary Crop</label>
+                        <select id="primary-crop">
+                            <option>Wheat</option>
+                            <option selected>Vegetables</option>
+                            <option>Rice</option>
+                            <option>Cotton</option>
+                            <option>Sugarcane</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="livestock">Livestock</label>
+                        <select id="livestock" multiple style="height: auto;">
+                            <option selected>Cows</option>
+                            <option selected>Buffaloes</option>
+                            <option>Goats</option>
+                            <option>Poultry</option>
+                            <option>Sheep</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Preferences Section -->
+                <div class="settings-section">
+                    <h2><i class="fas fa-sliders-h"></i>Preferences</h2>
+                    
+                    <div class="form-group">
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Receive marketing emails</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Receive SMS alerts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" aria-label="Dark mode">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Dark mode</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <select id="language">
+                            <option selected>English</option>
+                            <option>Hindi</option>
+                            <option>Marathi</option>
+                            <option>Bengali</option>
+                            <option>Telugu</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-outline">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Get all form elements
+        const profileForm = document.querySelector('.settings-content');
+        const languageSelect = document.getElementById('language');
+        const darkModeToggle = document.querySelector('input[type="checkbox"][aria-label="Dark mode"]');
+        const settingNavLinks = document.querySelectorAll('.setting-nav-link');
+        const settingSections = document.querySelectorAll('.settings-section');
+        let currentLanguage = 'en';
+
+        // Save setting to localStorage
+        function saveSetting() {
+            const settings = {
+                language: currentLanguage,
+                darkMode: document.body.classList.contains('dark-mode')
+            };
+            localStorage.setItem('userSetting', JSON.stringify(settings));
+        }
+
+        // Toggle dark mode
+        function toggleDarkMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            saveSetting();
+        }
+
+        // Navigation between setting sections
+        settingNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = link.textContent.trim().toLowerCase();
+                
+                // Update active states
+                settingNavLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show/hide relevant sections
+                settingSections.forEach(section => {
+                    if (section.id === targetSection) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Handle form submission
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                // Show loading state
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Saving...';
+                submitBtn.disabled = true;
+                
+                // Save all settings
+                saveSetting();
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.className = 'alert alert-success';
+                successMsg.textContent = 'Changes saved successfully';
+                profileForm.insertBefore(successMsg, profileForm.firstChild);
+                
+                // Remove success message after 3 seconds
+                setTimeout(() => successMsg.remove(), 3000);
+            } catch (error) {
+                // Show error message
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'alert alert-error';
+                errorMsg.textContent = 'An error occurred';
+                profileForm.insertBefore(errorMsg, profileForm.firstChild);
+            } finally {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Handle photo upload
+        const photoUploadBtn = document.querySelector('button.btn-outline');
+        const photoInput = document.createElement('input');
+        photoInput.type = 'file';
+        photoInput.accept = 'image/*';
+        photoInput.style.display = 'none';
+        document.body.appendChild(photoInput);
+
+        photoUploadBtn.addEventListener('click', () => {
+            photoInput.click();
+        });
+
+        photoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const avatar = document.querySelector('.user-avatar');
+                    avatar.style.backgroundImage = `url(${e.target.result})`;
+                    avatar.textContent = '';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Initialize settings
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            
+            // Add data-translate attributes
+            document.querySelectorAll('.setting-nav-link span').forEach(span => {
+                span.setAttribute('data-translate', span.textContent.trim());
+            });
+            
+            document.querySelectorAll('.settings-section h2').forEach(h2 => {
+                h2.setAttribute('data-translate', h2.textContent.trim());
+            });
+            
+            // Listen for language changes
+            languageSelect.addEventListener('change', (e) => {
+                changeLanguage(e.target.value);
+            });
+            
+            // Listen for dark mode toggle
+            darkModeToggle.addEventListener('change', (e) => {
+                toggleDarkMode(e.target.checked);
+            });
+        });
+    </script>
+</body>
+</html>

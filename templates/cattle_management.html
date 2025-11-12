@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Livestock Management | Gaongotha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+    <style>
+        :root {
+            --primary-green: #1a7f4e;
+            --dark-green: #0d3b22;
+            --light-green: #e8f5e9;
+            --accent: #ff7a3d;
+            --white: #ffffff;
+            --light-gray: #f8faf9;
+            --dark-text: #1a2e22;
+            --sidebar-width: 250px;
+            --card-shadow: 0 10px 30px rgba(26, 127, 78, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-green);
+            color: white;
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+            transition: all 0.3s;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 25px 30px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo img {
+            height: 36px;
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+        }
+        
+        .page-title p {
+            color: var(--dark-text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-green);
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .stat-icon.health {
+            background: rgba(255, 122, 61, 0.1);
+            color: var(--accent);
+        }
+        
+        .stat-icon.cattle {
+            background: rgba(26, 127, 78, 0.1);
+            color: var(--primary-green);
+        }
+        
+        .stat-icon.milk {
+            background: rgba(66, 165, 245, 0.1);
+            color: #42a5f5;
+        }
+        
+        .stat-icon.alert {
+            background: rgba(239, 83, 80, 0.1);
+            color: #ef5350;
+        }
+        
+        .stat-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .stat-info p {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            opacity: 0.8;
+        }
+        
+        /* Main Content Grid */
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cattle-list {
+            order: 1;
+        }
+
+        div.health-charts:has(.cattle-groups) {
+            order: 2;
+        }
+
+        div.health-charts:has(#tempChart) {
+            order: 3;
+        }
+
+        .alerts-section {
+            order: 4;
+        }
+        
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Cattle List */
+        .cattle-list {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: var(--dark-green);
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-green);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(26, 127, 78, 0.1);
+        }
+        
+        /* Refine search input styling */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(26, 127, 78, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 1rem 0;
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    padding: 8px;
+}
+
+.search-bar input:focus {
+    outline: none;
+}
+
+.search-bar button[type="submit"] {
+    background: none;
+    border: none;
+    color: var(--primary-green);
+    padding: 8px;
+    cursor: pointer;
+}
+
+        .add-animal-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .add-animal-btn:hover {
+            background: var(--dark-green);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 0.9rem;
+        }
+        
+        td {
+            font-size: 0.9rem;
+        }
+        
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-badge.healthy {
+            background: rgba(26, 127, 78, 0.1);
+            color: var(--primary-green);
+        }
+        
+        .status-badge.warning {
+            background: rgba(255, 152, 0, 0.1);
+            color: #ff9800;
+        }
+        
+        .status-badge.critical {
+            background: rgba(239, 83, 80, 0.1);
+            color: #ef5350;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--primary-green);
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 5px;
+        }
+        
+        /* Health Charts */
+        .health-charts {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-title {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+        
+        /* Cattle Groups */
+        .cattle-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .group-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .group-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .group-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .group-icon.milking {
+            background: #42a5f5;
+        }
+        
+        .group-icon.pregnant {
+            background: #ab47bc;
+        }
+        
+        .group-icon.calves {
+            background: #66bb6a;
+        }
+        
+        .group-icon.bulls {
+            background: #ef5350;
+        }
+        
+        .group-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .group-card p {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            opacity: 0.8;
+        }
+        
+        /* Alerts Section */
+        .alerts-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            order: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: start;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .alert-item:hover {
+            transform: translateX(5px);
+        }
+
+        .alert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .alert-icon.critical {
+            background: rgba(239, 83, 80, 0.1);
+            color: #ef5350;
+        }
+
+        .alert-icon.warning {
+            background: rgba(255, 152, 0, 0.1);
+            color: #ff9800;
+        }
+
+        .alert-content {
+            flex-grow: 1;
+        }
+
+        .alert-content h4 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+
+        .alert-time {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .close-alert {
+            background: none;
+            border: none;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0 5px;
+            margin-left: 10px;
+        }
+
+        .close-alert:hover {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes alertSlideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .alert-new {
+            animation: alertSlideIn 0.3s ease-out;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .logo span, .nav-link span {
+                display: none;
+            }
+            
+            .logo {
+                justify-content: center;
+                padding: 0 0 30px;
+            }
+            
+            .nav-link {
+                justify-content: center;
+                padding: 15px 0;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Health Monitoring Styles */
+.health-status-section {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.health-metric {
+    background: rgba(26, 127, 78, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-green);
+    margin: 10px 0;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--dark-text);
+    opacity: 0.8;
+}
+
+.trend-improving {
+    color: var(--primary-green);
+}
+
+.trend-declining {
+    color: #ef5350;
+}
+
+.trend-stable {
+    color: #ff9800;
+}
+
+.alerts-list {
+    margin-top: 15px;
+    padding: 0;
+    list-style: none;
+}
+
+.alert-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.alert-item.warning {
+    background: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+}
+
+.alert-item.danger {
+    background: rgba(239, 83, 80, 0.1);
+    color: #ef5350;
+}
+
+.alert-item i {
+    font-size: 1.1rem;
+}
+
+/* Alert Messages */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+    max-width: 400px;
+}
+
+.alert-success {
+    background: var(--primary-green);
+    color: white;
+}
+
+.alert-danger {
+    background: #ef5350;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Record Forms */
+.record-form {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.form-title {
+    color: var(--primary-green);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(26, 127, 78, 0.2);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(26, 127, 78, 0.1);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: var(--dark-text);
+}
+
+.submit-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: var(--dark-green);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-badge.Optimal {
+    background: rgba(26, 127, 78, 0.1);
+    color: var(--primary-green);
+}
+
+.status-badge.Moderate {
+    background: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+}
+
+.status-badge.Critical {
+    background: rgba(239, 83, 80, 0.1);
+    color: #ef5350;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .health-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .alert {
+        left: 20px;
+        right: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    {% include 'partials/sidebar.html' %}
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>Animal Management</h1>
+                <p>Monitor and manage your livestock's health, location, and productivity</p>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">TU</div>
+                <span>Test User</span>
+            </div>
+        </div>
+        
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon cattle">
+                    <i class="fas fa-cow"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>142</h3>
+                    <p>Total animals</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon health">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>128</h3>
+                    <p>Healthy</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon milk">
+                    <i class="fas fa-wine-bottle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>58</h3>
+                    <p>Milking today</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>5</h3>
+                    <p>Health alerts</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <div class="cattle-list">
+                <div class="section-header">
+                    <h2>Your animals</h2>
+                </div>
+                
+                <!-- Search bar -->
+                <div class="search-bar">
+                    <input type="text" placeholder="Search by tag ID or name..." id="searchInput" oninput="searchCattle(this.value)">
+                    <button type="submit" onclick="searchCattle(document.getElementById('searchInput').value)">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="{{ url_for('add_new_cattle') }}" class="add-animal-btn" style="text-decoration: none;">
+                        <i class="fas fa-plus"></i> Add more animals
+                    </a>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag ID</th>
+                                <th>Name</th>
+                                <th>Breed</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for animal in animals %}
+                            <tr>
+                                <td>CG-{{ animal.id }}</td>
+                                <td>{{ animal.name }}</td>
+                                <td>{{ animal.breed }}</td>
+                                <td><span class="status-badge {% if animal.type == 'Cow' %}
+                                        {% if animal.milk_production > 20 %}healthy{% elif animal.milk_production > 15 %}warning{% else %}critical{% endif %}
+                                    {% elif animal.type == 'Buffalo' %}
+                                        {% if animal.milk_production > 15 %}healthy{% elif animal.milk_production > 10 %}warning{% else %}critical{% endif %}
+                                    {% elif animal.type == 'Goat' %}
+                                        {% if animal.milk_production > 3 %}healthy{% elif animal.milk_production > 2 %}warning{% else %}critical{% endif %}
+                                    {% elif animal.type == 'Sheep' %}
+                                        {% if animal.milk_production > 1 %}healthy{% elif animal.milk_production > 0.5 %}warning{% else %}critical{% endif %}
+                                    {% elif animal.type == 'Ox' or animal.type == 'Bull' %}
+                                        {% if animal.weight > 400 %}healthy{% elif animal.weight > 300 %}warning{% else %}critical{% endif %}
+                                    {% else %}healthy{% endif %}">
+                                    {% if animal.type == 'Cow' %}
+                                        {% if animal.milk_production > 20 %}Healthy{% elif animal.milk_production > 15 %}Needs attention{% else %}Critical{% endif %}
+                                    {% elif animal.type == 'Buffalo' %}
+                                        {% if animal.milk_production > 15 %}Healthy{% elif animal.milk_production > 10 %}Needs attention{% else %}Critical{% endif %}
+                                    {% elif animal.type == 'Goat' %}
+                                        {% if animal.milk_production > 3 %}Healthy{% elif animal.milk_production > 2 %}Needs attention{% else %}Critical{% endif %}
+                                    {% elif animal.type == 'Sheep' %}
+                                        {% if animal.milk_production > 1 %}Healthy{% elif animal.milk_production > 0.5 %}Needs attention{% else %}Critical{% endif %}
+                                    {% elif animal.type == 'Ox' or animal.type == 'Bull' %}
+                                        {% if animal.weight > 400 %}Healthy{% elif animal.weight > 300 %}Needs attention{% else %}Critical{% endif %}
+                                    {% else %}
+                                        Healthy
+                                    {% endif %}
+                                </span></td>
+                                <td>
+                                    <button onclick="showAnimalProfile('{{ animal.id }}')" class="action-btn" title="View"><i class="fas fa-eye"></i></button>
+                                    <button onclick="editAnimal('{{ animal.id }}')" class="action-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button onclick="deleteAnimal('{{ animal.id }}')" class="action-btn" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            
+             <!-- Cattle Groups -->
+        <div class="health-charts">
+            <div class="section-header">
+                <h2>Animal groups</h2>
+                <button class="btn btn-outline">
+                    <i class="fas fa-filter"></i> Filter groups
+                </button>
+            </div>
+            
+            <div class="cattle-groups">
+                <div class="group-card">
+                    <div class="group-icon milking">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <h3>Milking animals</h3>
+                    <p>{{ animals|selectattr('type', 'equalto', 'Cow')|selectattr('milk_production', 'gt', 0)|list|length }} animals</p>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon pregnant">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Bulls</h3>
+                    <p>{{ animals|selectattr('type', 'equalto', 'Bull')|list|length }} animals</p>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon calves">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Cows</h3>
+                    <p>{{ animals|selectattr('type', 'equalto', 'Cow')|list|length }} animals</p>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon" style="background: var(--primary-green);">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h3>Total livestock</h3>
+                    <p>{{ animals|length }} animals</p>
+                </div>
+            </div>
+        </div>
+
+            <!-- Health Charts -->
+            <div class="health-charts">
+                <div class="section-header">
+                    <h2>Health analysis</h2>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-calendar-alt"></i> Last 7 days
+                    </button>
+                </div>
+                
+                <div class="chart-container">
+                    <p class="chart-title">Temperature trend (&deg;C)</p>
+                    <canvas id="tempChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <p class="chart-title">Activity level (steps per day)</p>
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="alerts-section">
+            <div class="section-header">
+                <h3>Notifications and alerts</h3>
+            </div>
+            <!-- Alerts will be dynamically inserted here -->
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Gaongotha AgriTech. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <!-- Health Information Modal -->
+<!-- <div class="modal fade" id="healthModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Health information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="health-status-wrapper">
+                    <h6>Current status:</h6>
+                    <span id="healthStatus" class="status-badge">Optimal</span>
+                </div>
+                <div class="health-metrics">
+                    <div class="metric">
+                        <label>Temperature:</label>
+                        <span id="temperature">--</span>&deg;C
+                    </div>
+                    <div class="metric">
+                        <label>Heart rate:</label>
+                        <span id="heartRate">--</span> BPM
+                    </div>
+                    <div class="metric">
+                        <label>Respiratory rate:</label>
+                        <span id="respRate">--</span>/min
+                    </div>
+                    <div class="metric">
+                        <label>Weight:</label>
+                        <span id="weight">--</span> kg
+                    </div>
+                </div>
+                <div class="vaccination-info">
+                    <h6>Vaccination information:</h6>
+                    <p>Last vaccine: <span id="lastVaccine">--</span></p>
+                    <p>Next vaccine date: <span id="nextVaccine">--</span></p>
+                </div>
+                <div id="healthAlerts" class="alerts-section">
+                    <!-- Alerts will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/csrf.js') }}"></script>
+    <script>
+        // Temperature Chart
+        const tempCtx = document.getElementById('tempChart').getContext('2d');
+        const tempChart = new Chart(tempCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Average Temperature',
+                    data: [38.2, 38.1, 38.4, 38.3, 38.5, 38.2, 38.6],
+                    borderColor: '#1a7f4e',
+                    backgroundColor: 'rgba(26, 127, 78, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true
+                }, {
+                    label: 'Normal Range',
+                    data: [38.0, 38.0, 38.0, 38.0, 38.0, 38.0, 38.0],
+                    borderColor: '#ff7a3d',
+                    borderWidth: 1,
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + '\\u00B0C';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 37,
+                        max: 40,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '\\u00B0C';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Activity Chart
+        const activityCtx = document.getElementById('activityChart').getContext('2d');
+        const activityChart = new Chart(activityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Average Steps',
+                    data: [4200, 3800, 4500, 4100, 3900, 3700, 4000],
+                    backgroundColor: 'rgba(66, 165, 245, 0.7)',
+                    borderColor: 'rgba(66, 165, 245, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Steps: ' + context.parsed.y;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Health Monitoring Functions
+async function loadHealthStatus(animalId) {
+    try {
+        const response = await fetch(`/api/animals/${animalId}/health`, {
+            method: 'GET',
+            headers: {
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const data = await response.json();
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        const health = data.data;
+        
+        // Update health display
+        document.getElementById('healthStatus').textContent = health.overall_status;
+        document.getElementById('healthStatus').className = `status-badge status-${health.overall_status.toLowerCase()}`;
+        
+        document.getElementById('temperature').textContent = health.temperature || '--';
+        document.getElementById('heartRate').textContent = health.heart_rate || '--';
+        document.getElementById('respRate').textContent = health.respiratory_rate || '--';
+        document.getElementById('weight').textContent = health.weight || '--';
+        
+        document.getElementById('lastVaccine').textContent = health.last_vaccine || 'No vaccine administered';
+        document.getElementById('nextVaccine').textContent = health.next_vaccine_due || 'Not scheduled';
+        
+        const alerts = document.getElementById('healthAlerts');
+        alerts.innerHTML = '';
+        
+        if (health.temperature > 39.5) {
+            alerts.innerHTML += '<div class="alert alert-danger">High temperature - medical check required</div>';
+        } else if (health.temperature > 39.0) {
+            alerts.innerHTML += '<div class="alert alert-warning">Slightly elevated temperature - keep monitoring</div>';
+        }
+        
+        $('#healthModal').modal('show');
+    } catch (error) {
+        showError("Error while loading health information: " + error.message);
+    }
+}
+
+function updateHealthDisplay(healthData) {
+    const healthStatus = document.getElementById('healthStatus');
+    const alerts = document.getElementById('healthAlerts');
+    
+    // Update health status
+    healthStatus.textContent = healthData.overall_status;
+    healthStatus.className = `status-badge status-${healthData.overall_status.toLowerCase()}`;
+    
+    // Update alerts
+    alerts.innerHTML = '';
+    if (healthData.alerts && healthData.alerts.length > 0) {
+        const alertList = document.createElement('ul');
+        healthData.alerts.forEach(alert => {
+            const li = document.createElement('li');
+            li.textContent = alert;
+            alertList.appendChild(li);
+        });
+        alerts.appendChild(alertList);
+    }
+    
+    // Update vaccination status
+    if (healthData.vaccination_status) {
+        document.getElementById('vaccinationStatus').textContent = healthData.vaccination_status;
+    }
+    
+    // Update next checkup
+    if (healthData.next_checkup_due) {
+        document.getElementById('nextCheckup').textContent = formatDate(healthData.next_checkup_due);
+    }
+    
+    // Update milk production trend if available
+    if (healthData.milk_production_trend) {
+        updateMilkTrend(healthData.milk_production_trend);
+    }
+}
+
+function updateMilkTrend(trendData) {
+    const trendElement = document.getElementById('milkTrend');
+    if (trendData.status === 'declining') {
+        trendElement.innerHTML = `<i class="fas fa-arrow-down text-danger"></i> ${Math.abs(trendData.change_percent).toFixed(1)}% lower`;
+        trendElement.className = 'trend-declining';
+    } else if (trendData.status === 'improving') {
+        trendElement.innerHTML = `<i class="fas fa-arrow-up text-success"></i> ${trendData.change_percent.toFixed(1)}% higher`;
+        trendElement.className = 'trend-improving';
+    } else {
+        trendElement.innerHTML = '<i class="fas fa-equals"></i> Stable';
+        trendElement.className = 'trend-stable';
+    }
+}
+
+async function recordMilkProduction(event) {
+    event.preventDefault();
+    const form = event.target;
+    const animalId = currentCattle.id;
+    
+    try {
+        const formData = {
+            production_date: form.milkDate.value,
+            amount: parseFloat(form.milkAmount.value),
+            fat_content: parseFloat(form.milkFat.value),
+            time_of_day: form.milkTime.value,
+            notes: form.milkNotes.value
+        };
+        
+        const response = await fetch(`/api/animals/${animalId}/milk-production`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        showSuccess("Milk production logged");
+        closeRecordEntry('milk');
+        loadHealthStatus(animalId);
+    } catch (error) {
+        showError("Error while logging milk production: " + error.message);
+    }
+}
+
+async function addHealthRecord(event) {
+    event.preventDefault();
+    const form = event.target;
+    const animalId = currentCattle.id;
+    
+    try {
+        const formData = {
+            checkup_date: form.healthDate.value,
+            health_issue: form.healthDetails.value,
+            vaccination: form.healthType.value === 'vaccine' ? form.healthDetails.value : null,
+            treatment: form.healthType.value === 'treatment' ? form.healthDetails.value : null,
+            vet_name: form.healthVet.value,
+            notes: form.healthNotes.value,
+            next_checkup_date: calculateNextCheckup(form.healthDate.value)
+        };
+        
+        const response = await fetch(`/api/animals/${animalId}/health-record`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        showSuccess("Health record added");
+        closeRecordEntry('health');
+        loadHealthStatus(animalId);
+    } catch (error) {
+        showError("Error while logging health record: " + error.message);
+    }
+}
+
+async function addBreedingRecord(event) {
+    event.preventDefault();
+    const form = event.target;
+    const animalId = currentCattle.id;
+    
+    try {
+        const formData = {
+            record_date: form.breedingDate.value,
+            status: form.breedingType.value,
+            method: form.breedingType.value === 'ai' ? 'artificial' : 'natural',
+            conception_date: form.breedingType.value === 'pregnant' ? form.breedingDate.value : null,
+            notes: form.breedingNotes.value
+        };
+        
+        const response = await fetch(`/api/animals/${animalId}/breeding-record`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        showSuccess("Breeding record added");
+        closeRecordEntry('breeding');
+        loadHealthStatus(animalId);
+    } catch (error) {
+        showError("Error while logging breeding record: " + error.message);
+    }
+}
+
+// Helper functions
+function calculateNextCheckup(checkupDate) {
+    const date = new Date(checkupDate);
+    date.setDate(date.getDate() + 90); // Next checkup after 90 days
+    return date.toISOString().split('T')[0];
+}
+
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('mr-IN', options);
+}
+
+function showSuccess(message) {
+    const alert = document.createElement('div');
+    alert.className = 'alert alert-success';
+    alert.textContent = message;
+    document.querySelector('.main-content').prepend(alert);
+    setTimeout(() => alert.remove(), 3000);
+}
+
+function showError(message) {
+    const alert = document.createElement('div');
+    alert.className = 'alert alert-danger';
+    alert.textContent = message;
+    document.querySelector('.main-content').prepend(alert);
+    setTimeout(() => alert.remove(), 5000);
+}
+
+function openRecordEntry(type) {
+    const modal = document.getElementById(`${type}RecordModal`);
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function closeRecordEntry(type) {
+    const modal = document.getElementById(`${type}RecordModal`);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Close modals when clicking outside
+window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
+    }
+});
+
+function searchCattle(query) {
+    query = query.toLowerCase().trim();
+    const tableRows = document.querySelectorAll('.table-container tbody tr');
+    
+    tableRows.forEach(row => {
+        const id = row.children[0].textContent.toLowerCase();
+        const name = row.children[1].textContent.toLowerCase();
+        const breed = row.children[2].textContent.toLowerCase();
+        
+        if (id.includes(query) || name.includes(query) || breed.includes(query)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+
+    // Show a message if no results found
+    const noResults = document.getElementById('noResults');
+    const hasVisibleRows = Array.from(tableRows).some(row => row.style.display !== 'none');
+    
+    if (!hasVisibleRows) {
+        if (!noResults) {
+            const message = document.createElement('div');
+            message.id = 'noResults';
+            message.style.textAlign = 'center';
+            message.style.padding = '20px';
+            message.style.color = '#666';
+            message.textContent = 'No results found';
+            document.querySelector('.table-container').appendChild(message);
+        }
+    } else if (noResults) {
+        noResults.remove();
+    }
+}
+
+function viewAnimalProfile(animalId) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    `;
+
+    const content = document.createElement('div');
+    content.className = 'modal-content';
+    content.style.cssText = `
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 400px;
+        position: relative;
+    `;
+
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.cssText = `
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--dark-text);
+    `;
+    closeBtn.onclick = () => document.body.removeChild(modal);
+
+    content.innerHTML = `
+        <h3 style="margin-bottom: 20px; color: var(--dark-green);">View and download</h3>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            <button onclick="showIDCard(${animalId})" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-id-card"></i> View ID card
+            </button>
+            <button onclick="showQRCode(${animalId})" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-qrcode"></i> View QR code
+            </button>
+        </div>
+    `;
+
+    content.prepend(closeBtn);
+    modal.appendChild(content);
+    document.body.appendChild(modal);
+
+    // Close on outside click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) document.body.removeChild(modal);
+    });
+}
+
+function showIDCard(animalId) {
+    window.location.href = `/api/animals/${animalId}/card`;
+}
+
+async function showQRCode(animalId) {
+    try {
+        const response = await fetch(`/api/animals/${animalId}/qr`);
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal fade';
+        modal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Animal QR Code</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="data:image/png;base64,${data.qr_code}" 
+                             alt="QR Code" 
+                             style="max-width: 200px; margin-bottom: 15px;">
+                        <p>Scan this QR code to view the full animal details</p>
+                        <button onclick="downloadQRCode('${data.qr_code}', ${animalId})" 
+                                class="btn btn-primary">
+                            <i class="fas fa-download"></i> Download QR code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        new bootstrap.Modal(modal).show();
+        
+        modal.addEventListener('hidden.bs.modal', () => {
+            document.body.removeChild(modal);
+        });
+    } catch (error) {
+        showError("Error loading QR code: " + error.message);
+    }
+}
+
+function downloadQRCode(base64Data, animalId) {
+    const link = document.createElement('a');
+    link.href = `data:image/png;base64,${base64Data}`;
+    link.download = `animal_QR_${animalId}.png`;
+    link.click();
+}
+
+async function editAnimal(animalId) {
+    try {
+        const response = await fetch(`/api/animals/${animalId}`);
+        const data = await response.json();
+        
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        const animal = data.data;
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        `;
+        
+        const content = document.createElement('div');
+        content.className = 'modal-content';
+        content.style.cssText = `
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        `;
+        
+        content.innerHTML = `
+            <h3 style="margin-bottom: 20px; color: var(--dark-green);">Edit animal information</h3>
+            <form id="editAnimalForm" onsubmit="return updateAnimal(event, ${animalId})">
+                <div class="form-group">
+                    <label for="edit_name">Name</label>
+                    <input type="text" id="edit_name" value="${animal.name}" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_type">Type</label>
+                    <input type="text" id="edit_type" value="${animal.type}" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_breed">Breed</label>
+                    <input type="text" id="edit_breed" value="${animal.breed}" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_age">Age (months)</label>
+                    <input type="number" id="edit_age" value="${animal.age}" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_weight">Weight (kg)</label>
+                    <input type="number" id="edit_weight" value="${animal.weight}" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_milk_production">Milk production (liters/day)</label>
+                    <input type="number" id="edit_milk_production" value="${animal.milk_production}" step="0.1">
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-outline" onclick="document.body.removeChild(modal)">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        `;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.style.cssText = `
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-text);
+        `;
+        closeBtn.onclick = () => document.body.removeChild(modal);
+
+        content.prepend(closeBtn);
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) document.body.removeChild(modal);
+        });
+    } catch (error) {
+        showError("Error while loading animal information: " + error.message);
+    }
+}
+
+async function updateAnimal(event, animalId) {
+    event.preventDefault();
+    
+    try {
+        const formData = {
+            name: document.getElementById('edit_name').value,
+            type: document.getElementById('edit_type').value,
+            breed: document.getElementById('edit_breed').value,
+            age: parseInt(document.getElementById('edit_age').value),
+            weight: parseFloat(document.getElementById('edit_weight').value),
+            milk_production: parseFloat(document.getElementById('edit_milk_production').value) || 0
+        };
+        
+        const response = await fetch(`/api/animals/${animalId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        if (!data.success) {
+            throw new Error(data.error);
+        }
+        
+        showSuccess("Animal information updated");
+        window.location.reload();
+    } catch (error) {
+        showError("Error while updating animal information: " + error.message);
+    }
+    return false;
+}
+
+async function deleteAnimal(animalId) {
+    if (confirm('Are you sure you want to delete this animal?')) {
+        try {
+            const response = await fetch(`/api/animals/${animalId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+                }
+            });
+            
+            const data = await response.json();
+            if (data.success) {
+                showSuccess("Animal deleted successfully");
+                window.location.reload();
+            } else {
+                throw new Error(data.error);
+            }
+        } catch (error) {
+            showError("Error while deleting the animal: " + error.message);
+        }
+    }
+}
+
+const currentCattle = {
+    id: document.querySelector('.table-container tbody tr:first-child td:first-child')?.textContent?.replace('CG-', '') || null
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (currentCattle.id) {
+        loadHealthStatus(currentCattle.id);
+    }
+});
+
+let socket;
+
+function initializeWebSocket() {
+    // Get the socket.io configuration from the server
+    socket = io({
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        reconnectionAttempts: Infinity
+    });
+    
+    socket.on('connect', () => {
+        console.log('Connected to server');
+        if (currentCattle && currentCattle.id) {
+            // Subscribe to animal-specific updates
+            socket.emit('subscribe', { animal_id: currentCattle.id });
+        }
+    });
+    
+    socket.on('disconnect', () => {
+        console.log('Disconnected from server');
+    });
+    
+    socket.on('health_alert', (data) => {
+        showAlert(data.message, data.status === 'urgent' ? 'danger' : 'warning');
+        
+        if (currentCattle && data.animal_id === currentCattle.id) {
+            loadHealthStatus(currentCattle.id);
+        }
+        
+        addAlert(data);
+    });
+
+    socket.on('temperature_update', (data) => {
+        if (currentCattle && data.animal_id === currentCattle.id) {
+            const dataset = tempChart.data.datasets[0];
+            dataset.data.push(data.temperature);
+            dataset.data.shift();
+            tempChart.update();
+        }
+    });
+
+    socket.on('activity_update', (data) => {
+        if (currentCattle && data.animal_id === currentCattle.id) {
+            const dataset = activityChart.data.datasets[0];
+            dataset.data.push(data.steps);
+            dataset.data.shift();
+            activityChart.update();
+        }
+    });
+
+    socket.on('error', (error) => {
+        console.error('Socket.IO Error:', error);
+        showError('Connection error: please refresh the page');
+    });
+}
+
+function addAlert(data) {
+    const alertsSection = document.querySelector('.alerts-section');
+    const alertItem = document.createElement('div');
+    alertItem.className = `alert-item ${data.status === 'urgent' ? 'danger' : 'warning'} alert-new`;
+    
+    alertItem.innerHTML = `
+        <div class="alert-icon ${data.status === 'urgent' ? 'critical' : 'warning'}">
+            <i class="fas ${data.status === 'urgent' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle'}"></i>
+        </div>
+        <div class="alert-content">
+            <h4>${data.message}</h4>
+            <span class="alert-time">${formatDate(new Date())}</span>
+        </div>
+        <button class="close-alert" onclick="this.parentElement.remove()">&times;</button>
+    `;
+    
+    alertsSection.insertBefore(alertItem, alertsSection.firstChild);
+    
+    const audio = new Audio('/static/sounds/alert.mp3');
+    audio.play().catch(err => console.log('Error playing alert sound:', err));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeWebSocket();
+});
+    </script>
+</body>
+</html>

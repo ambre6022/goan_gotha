@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Hub | Gaongotha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #1a7f4e;
+            --dark-green: #0d3b22;
+            --light-green: #e8f5e9;
+            --accent: #ff7a3d;
+            --white: #ffffff;
+            --light-gray: #f8faf9;
+            --dark-text: #1a2e22;
+            --sidebar-width: 250px;
+            --card-shadow: 0 10px 30px rgba(26, 127, 78, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-green);
+            color: white;
+            padding: 30px 0;
+            position: fixed;
+            height: 100vh;
+            transition: all 0.3s;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 25px 30px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo img {
+            height: 36px;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 3px solid var(--accent);
+        }
+
+        .nav-link i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .page-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: var(--dark-text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--light-green);
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .stat-icon.income {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+
+        .stat-icon.expense {
+            background: rgba(239, 83, 80, 0.1);
+            color: #EF5350;
+        }
+
+        .stat-icon.profit {
+            background: rgba(33, 150, 243, 0.1);
+            color: #2196F3;
+        }
+
+        .stat-icon.loan {
+            background: rgba(255, 152, 0, 0.1);
+            color: #FF9800;
+        }
+
+        .stat-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+
+        .stat-info p {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            opacity: 0.8;
+        }
+
+        /* Main Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Financial Overview */
+        .financial-overview {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            /* margin-bottom: 40px; Added margin at bottom */
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: var(--dark-green);
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background: rgba(26, 127, 78, 0.1);
+        }
+
+        select.btn {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 35px;
+        }
+
+        /* Charts Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+
+        .chart-title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            color: var(--dark-green);
+            font-weight: 500;
+        }
+
+        .chart-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chart-option-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chart-option-btn.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        .chart-option-btn:hover:not(.active) {
+            background: #f5f5f5;
+        }
+
+        /* Transactions Table */
+        .transactions-table {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 0.9rem;
+            background: var(--light-green);
+        }
+
+        td {
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .amount-income {
+            color: #4CAF50;
+            font-weight: 500;
+        }
+
+        .amount-expense {
+            color: #EF5350;
+            font-weight: 500;
+        }
+
+        .category-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .category-badge.agriculture {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+
+        .category-badge.livestock {
+            background: rgba(255, 152, 0, 0.1);
+            color: #FF9800;
+        }
+
+        .category-badge.equipment {
+            background: rgba(33, 150, 243, 0.1);
+            color: #2196F3;
+        }
+
+        .category-badge.household {
+            background: rgba(156, 39, 176, 0.1);
+            color: #9C27B0;
+        }
+
+        /* Loan Calculator */
+        .loan-calculator {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-green);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 127, 78, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .calculator-result {
+            background: var(--light-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .result-item.total {
+            font-weight: 600;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        /* Loan Marketplace */
+        .loan-marketplace {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-top: 30px;
+        }
+
+        .loan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .loan-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+            background: white;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .loan-header {
+            padding: 18px;
+            background: var(--light-green);
+            border-bottom: 1px solid #eee;
+        }
+
+        .loan-header h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-green);
+        }
+
+        .loan-header p {
+            font-size: 0.85rem;
+            color: var(--dark-text);
+            opacity: 0.8;
+        }
+
+        .loan-body {
+            padding: 18px;
+        }
+
+        .loan-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+        }
+
+        .loan-rate {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin: 10px 0;
+        }
+
+        .loan-body p {
+            font-size: 0.9rem;
+            color: var(--dark-text);
+            line-height: 1.5;
+        }
+
+        .loan-footer {
+            padding: 15px;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 8% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 50%;
+            max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalopen 0.3s;
+        }
+
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark-green);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: absolute;
+            right: 25px;
+            top: 20px;
+        }
+
+        .close:hover {
+            color: var(--dark-text);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+
+            .logo span,
+            .nav-link span {
+                display: none;
+            }
+
+            .logo {
+                justify-content: center;
+                padding: 0 0 30px;
+            }
+
+            .nav-link {
+                justify-content: center;
+                padding: 15px 0;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .modal-content {
+                width: 80%;
+                margin: 15% auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+                padding: 20px;
+            }
+
+            .chart-options {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .loan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 25% auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    {% include 'partials/sidebar.html' %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1>Financial Hub</h1>
+                <p>Manage your farm finances, loans, and investments</p>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">TU</div>
+                <span>Test User</span>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon income">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-income">&#8377;1,42,500</h3>
+                    <p>Total Income</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon expense">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-expense">&#8377;87,200</h3>
+                    <p>Total Expenses</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon profit">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="net-profit">&#8377;55,300</h3>
+                    <p>Net Profit</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon loan">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="active-loans">&#8377;2,50,000</h3>
+                    <p>Active Loans</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Financial Overview -->
+            <div class="financial-overview">
+                <div class="section-header">
+                    <h2>Financial Overview</h2>
+                    <select id="time-period" class="btn btn-outline">
+                        <option value="6">Last 6 Months</option>
+                        <option value="3">Last 3 Months</option>
+                        <option value="12">Last 12 Months</option>
+                    </select>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title-container">
+                        <p class="chart-title">Financial Analysis</p>
+                        <div class="chart-options">
+                            <button class="chart-option-btn active" data-chart="income-expense">Income/Expense</button>
+                            <button class="chart-option-btn" data-chart="profit-loss">Profit/Loss</button>
+                            <button class="chart-option-btn" data-chart="category-wise">Category Wise</button>
+                        </div>
+                    </div>
+                    <canvas id="financialChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title-container">
+                        <p class="chart-title">Expense Breakdown</p>
+                        <div class="chart-options">
+                            <button class="chart-option-btn active" data-breakdown="expense">Expense</button>
+                            <button class="chart-option-btn" data-breakdown="income">Income</button>
+                        </div>
+                    </div>
+                    <canvas id="breakdownChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Transactions Table -->
+            <div class="transactions-table">
+                <div class="section-header">
+                    <h2>Recent Transactions</h2>
+                    <div>
+                        <select id="transaction-filter" class="btn btn-outline">
+                            <option value="all">All</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                        <button class="btn btn-primary" id="add-transaction-btn">
+                            <i class="fas fa-plus"></i> Add Transaction
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body">
+                            <!-- Transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loan Calculator -->
+        <div class="loan-calculator">
+            <div class="section-header">
+                <h2>Loan Calculator</h2>
+                <button class="btn btn-outline" id="clear-calculator">
+                    <i class="fas fa-history"></i> Clear
+                </button>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="loanAmount">Loan Amount (&#8377;)</label>
+                    <input type="number" id="loanAmount" placeholder="e.g. 100000">
+                </div>
+                <div class="form-group">
+                    <label for="interestRate">Interest Rate (%)</label>
+                    <input type="number" id="interestRate" placeholder="e.g. 8.5" step="0.1">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="loanTerm">Loan Term (years)</label>
+                    <input type="number" id="loanTerm" placeholder="e.g. 5">
+                </div>
+                <div class="form-group">
+                    <label for="paymentFrequency">Payment Frequency</label>
+                    <select id="paymentFrequency">
+                        <option value="12">Monthly</option>
+                        <option value="4">Quarterly</option>
+                        <option value="2">Half-Yearly</option>
+                        <option value="1">Yearly</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calculator-result">
+                <div class="result-item">
+                    <span>Periodic Payment:</span>
+                    <span id="periodicPayment">&#8377;0</span>
+                </div>
+                <div class="result-item">
+                    <span>Total Interest:</span>
+                    <span id="totalInterest">&#8377;0</span>
+                </div>
+                <div class="result-item total">
+                    <span>Total Payment:</span>
+                    <span id="totalPayment">&#8377;0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loan Marketplace -->
+        <div class="loan-marketplace">
+            <div class="section-header">
+                <h2>Loan Marketplace</h2>
+                <button class="btn btn-outline" id="find-more-loans">
+                    <i class="fas fa-search"></i> Find More
+                </button>
+            </div>
+
+            <div class="loan-grid" id="loan-offers">
+                <!-- Loan cards will be loaded here -->
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Gaongotha AgriTech. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <!-- Add Transaction Modal -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2>Add New Transaction</h2>
+            </div>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label for="transaction-type">Transaction Type</label>
+                    <select id="transaction-type" required>
+                        <option value="">Select Type</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transaction-amount">Amount (&#8377;)</label>
+                    <input type="number" id="transaction-amount" placeholder="Enter amount" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="transaction-description">Description</label>
+                    <input type="text" id="transaction-description" placeholder="Enter description" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="transaction-category">Category</label>
+                    <select id="transaction-category" required>
+                        <option value="">Select Category</option>
+                        <option value="agriculture">Agriculture</option>
+                        <option value="livestock">Livestock</option>
+                        <option value="equipment">Equipment</option>
+                        <option value="household">Household</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transaction-date">Date</label>
+                    <input type="date" id="transaction-date" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Transaction</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loan Application Modal -->
+    <div id="loan-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2 id="loan-modal-title">Apply for Loan</h2>
+            </div>
+            <form id="loan-application-form">
+                <input type="hidden" id="loan-type">
+                <input type="hidden" id="loan-bank">
+                <input type="hidden" id="loan-rate">
+
+                <div class="form-group">
+                    <label for="applicant-name">Full Name</label>
+                    <input type="text" id="applicant-name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="applicant-email">Email</label>
+                    <input type="email" id="applicant-email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="applicant-phone">Phone Number</label>
+                    <input type="tel" id="applicant-phone" placeholder="Enter your phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loan-amount-apply">Loan Amount (&#8377;)</label>
+                    <input type="number" id="loan-amount-apply" placeholder="Enter loan amount" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loan-purpose">Purpose of Loan</label>
+                    <textarea id="loan-purpose" rows="4" placeholder="Describe the purpose of this loan"
+                        required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+    <script>
+        // Sample data for the financial hub
+        const financialData = {
+            income: 142500,
+            expense: 87200,
+            loans: 250000,
+            transactions: [
+                { id: 1, date: '2023-10-15', description: 'Milk Sale - Amul Dairy', category: 'livestock', amount: 12500, type: 'income' },
+                { id: 2, date: '2023-10-14', description: 'Fertilizer Purchase', category: 'agriculture', amount: 8200, type: 'expense' },
+                { id: 3, date: '2023-10-12', description: 'Vegetable Sale - Local Market', category: 'agriculture', amount: 6800, type: 'income' },
+                { id: 4, date: '2023-10-10', description: 'Equipment Repair', category: 'equipment', amount: 3500, type: 'expense' },
+                { id: 5, date: '2023-10-08', description: 'Animal Feed', category: 'livestock', amount: 5700, type: 'expense' },
+                { id: 6, date: '2023-10-05', description: 'Household Expenses', category: 'household', amount: 4200, type: 'expense' },
+                { id: 7, date: '2023-09-28', description: 'Crop Sale - Wheat', category: 'agriculture', amount: 18500, type: 'income' },
+                { id: 8, date: '2023-09-25', description: 'Irrigation Pump', category: 'equipment', amount: 12500, type: 'expense' }
+            ],
+            incomeExpenseData: {
+                '6': {
+                    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    income: [120000, 135000, 110000, 142500, 128000, 95000],
+                    expense: [75000, 82000, 78000, 87200, 91000, 52000],
+                    categories: {
+                        agriculture: { income: [65000, 70000, 60000, 75000, 70000, 50000], expense: [35000, 40000, 30000, 42000, 45000, 25000] },
+                        livestock: { income: [40000, 45000, 35000, 45000, 40000, 30000], expense: [25000, 30000, 25000, 30000, 35000, 20000] },
+                        equipment: { income: [10000, 12000, 10000, 15000, 12000, 10000], expense: [12000, 10000, 15000, 12000, 8000, 5000] },
+                        household: { income: [5000, 8000, 5000, 7500, 6000, 5000], expense: [3000, 2000, 8000, 3000, 3000, 2000] }
+                    }
+                },
+                '3': {
+                    labels: ['Aug', 'Sep', 'Oct'],
+                    income: [142500, 128000, 95000],
+                    expense: [87200, 91000, 52000],
+                    categories: {
+                        agriculture: { income: [75000, 70000, 50000], expense: [42000, 45000, 25000] },
+                        livestock: { income: [45000, 40000, 30000], expense: [30000, 35000, 20000] },
+                        equipment: { income: [15000, 12000, 10000], expense: [12000, 8000, 5000] },
+                        household: { income: [7500, 6000, 5000], expense: [3000, 3000, 2000] }
+                    }
+                },
+                '12': {
+                    labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    income: [95000, 110000, 105000, 98000, 115000, 125000, 120000, 135000, 110000, 142500, 128000, 95000],
+                    expense: [65000, 72000, 68000, 75000, 82000, 78000, 75000, 82000, 78000, 87200, 91000, 52000],
+                    categories: {
+                        agriculture: { income: [50000, 60000, 55000, 50000, 60000, 65000, 65000, 70000, 60000, 75000, 70000, 50000], expense: [30000, 35000, 30000, 35000, 40000, 35000, 35000, 40000, 30000, 42000, 45000, 25000] },
+                        livestock: { income: [30000, 35000, 35000, 35000, 40000, 45000, 40000, 45000, 35000, 45000, 40000, 30000], expense: [25000, 25000, 25000, 30000, 30000, 30000, 25000, 30000, 25000, 30000, 35000, 20000] },
+                        equipment: { income: [10000, 10000, 10000, 8000, 10000, 10000, 10000, 12000, 10000, 15000, 12000, 10000], expense: [8000, 10000, 10000, 8000, 10000, 10000, 12000, 10000, 15000, 12000, 8000, 5000] },
+                        household: { income: [5000, 5000, 5000, 5000, 5000, 5000, 5000, 8000, 5000, 7500, 6000, 5000], expense: [2000, 2000, 3000, 2000, 2000, 3000, 3000, 2000, 8000, 3000, 3000, 2000] }
+                    }
+                }
+            },
+            expenseCategories: {
+                agriculture: 35,
+                livestock: 40,
+                equipment: 15,
+                household: 8,
+                other: 2
+            },
+            incomeSources: {
+                agriculture: 45,
+                livestock: 30,
+                equipment: 10,
+                household: 10,
+                other: 5
+            },
+            loanOffers: [
+                {
+                    id: 1,
+                    name: 'Kisan Credit Card',
+                    bank: 'State Bank of India',
+                    term: '5 years',
+                    maxAmount: '\u20B95,00,000',
+                    rate: 7.5,
+                    description: 'Special agricultural loan with flexible repayment options'
+                },
+                {
+                    id: 2,
+                    name: 'Dairy Farm Loan',
+                    bank: 'NABARD',
+                    term: '7 years',
+                    maxAmount: '\u20B910,00,000',
+                    rate: 6.9,
+                    description: 'For dairy farmers with subsidy options available'
+                },
+                {
+                    id: 3,
+                    name: 'Micro Irrigation Loan',
+                    bank: 'HDFC Bank',
+                    term: '3 years',
+                    maxAmount: '\u20B93,00,000',
+                    rate: 8.2,
+                    description: 'For purchasing irrigation equipment with 25% subsidy'
+                }
+            ]
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize charts
+            initCharts('6');
+
+            // Load transactions
+            loadTransactions();
+
+            // Load loan offers
+            loadLoanOffers();
+
+            // Calculate net profit
+            calculateNetProfit();
+
+            // Set up event listeners
+            setupEventListeners();
+
+            // Set default date to today
+            document.getElementById('transaction-date').valueAsDate = new Date();
+        });
+
+        // Chart variables
+        let financialChart, breakdownChart;
+        let currentChartType = 'income-expense';
+        let currentBreakdownType = 'expense';
+
+        // Initialize charts
+        function initCharts(months) {
+            const data = financialData.incomeExpenseData[months];
+
+            // Destroy existing charts if they exist
+            if (financialChart) financialChart.destroy();
+            if (breakdownChart) breakdownChart.destroy();
+
+            // Main Financial Chart
+            const financialCtx = document.getElementById('financialChart').getContext('2d');
+
+            let financialChartConfig;
+
+            switch (currentChartType) {
+                case 'income-expense':
+                    financialChartConfig = getIncomeExpenseChartConfig(data);
+                    break;
+                case 'profit-loss':
+                    financialChartConfig = getProfitLossChartConfig(data);
+                    break;
+                case 'category-wise':
+                    financialChartConfig = getCategoryWiseChartConfig(data);
+                    break;
+            }
+
+            financialChart = new Chart(financialCtx, financialChartConfig);
+
+            // Breakdown Chart
+            const breakdownCtx = document.getElementById('breakdownChart').getContext('2d');
+            breakdownChart = new Chart(breakdownCtx, getBreakdownChartConfig(currentBreakdownType));
+        }
+
+        function getIncomeExpenseChartConfig(data) {
+            return {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: 'Income',
+                            data: data.income,
+                            backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                            borderColor: 'rgba(76, 175, 80, 1)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Expenses',
+                            data: data.expense,
+                            backgroundColor: 'rgba(239, 83, 80, 0.7)',
+                            borderColor: 'rgba(239, 83, 80, 1)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: getCommonChartOptions('Income vs Expenses (\u20B9)')
+            };
+        }
+
+        function getProfitLossChartConfig(data) {
+            // Calculate profit/loss for each month
+            const profitLoss = data.income.map((income, index) => income - data.expense[index]);
+
+            return {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Profit/Loss',
+                        data: profitLoss,
+                        backgroundColor: profitLoss.map(value =>
+                            value >= 0 ? 'rgba(76, 175, 80, 0.7)' : 'rgba(239, 83, 80, 0.7)'
+                        ),
+                        borderColor: profitLoss.map(value =>
+                            value >= 0 ? 'rgba(76, 175, 80, 1)' : 'rgba(239, 83, 80, 1)'
+                        ),
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: getCommonChartOptions('Monthly Profit/Loss (\u20B9)')
+            };
+        }
+
+        function getCategoryWiseChartConfig(data) {
+            const categories = ['Agriculture', 'Livestock', 'Equipment', 'Household', 'Other'];
+            const incomeData = [
+                data.categories.agriculture.income.reduce((a, b) => a + b, 0) / data.categories.agriculture.income.length,
+                data.categories.livestock.income.reduce((a, b) => a + b, 0) / data.categories.livestock.income.length,
+                data.categories.equipment.income.reduce((a, b) => a + b, 0) / data.categories.equipment.income.length,
+                data.categories.household.income.reduce((a, b) => a + b, 0) / data.categories.household.income.length,
+                0 // Other
+            ];
+
+            const expenseData = [
+                data.categories.agriculture.expense.reduce((a, b) => a + b, 0) / data.categories.agriculture.expense.length,
+                data.categories.livestock.expense.reduce((a, b) => a + b, 0) / data.categories.livestock.expense.length,
+                data.categories.equipment.expense.reduce((a, b) => a + b, 0) / data.categories.equipment.expense.length,
+                data.categories.household.expense.reduce((a, b) => a + b, 0) / data.categories.household.expense.length,
+                0 // Other
+            ];
+
+            return {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [
+                        {
+                            label: 'Income',
+                            data: incomeData,
+                            backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                            borderColor: 'rgba(76, 175, 80, 1)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Expense',
+                            data: expenseData,
+                            backgroundColor: 'rgba(239, 83, 80, 0.7)',
+                            borderColor: 'rgba(239, 83, 80, 1)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: getCommonChartOptions('Category Wise Analysis (\u20B9)')
+            };
+        }
+
+        function getBreakdownChartConfig(type) {
+            const categories = ['Agriculture', 'Livestock', 'Equipment', 'Household', 'Other'];
+            const colors = ['#4CAF50', '#FF9800', '#2196F3', '#9C27B0', '#607D8B'];
+
+            const data = type === 'expense' ? [
+                financialData.expenseCategories.agriculture,
+                financialData.expenseCategories.livestock,
+                financialData.expenseCategories.equipment,
+                financialData.expenseCategories.household,
+                financialData.expenseCategories.other
+            ] : [
+                financialData.incomeSources.agriculture,
+                financialData.incomeSources.livestock,
+                financialData.incomeSources.equipment,
+                financialData.incomeSources.household,
+                financialData.incomeSources.other
+            ];
+
+            return {
+                type: 'doughnut',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors,
+                        borderWidth: 0,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const total = type === 'expense' ? financialData.expense : financialData.income;
+                                    return `${context.label}: ${context.raw}% (\u20B9${Math.round(total * context.raw / 100).toLocaleString('en-IN')})`;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: type === 'expense' ? 'Expense Breakdown' : 'Income Sources',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        // Update the getCommonChartOptions function to enhance month labels
+        function getCommonChartOptions(title) {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                family: 'Poppins',
+                                size: 12,
+                                weight: '500'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.dataset.label}: \u20B9${context.parsed.y.toLocaleString('en-IN')}`;
+                            }
+                        },
+                        bodyFont: {
+                            family: 'Poppins',
+                            size: 12,
+                            weight: '500'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: title,
+                        font: {
+                            size: 16,
+                            family: 'Poppins',
+                            weight: '600'
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return '\u20B9' + value.toLocaleString('en-IN');
+                            },
+                            font: {
+                                family: 'Poppins',
+                                size: 11,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 12,
+                                weight: '600'
+                            },
+                            // Add padding between month labels
+                            padding: 30,
+                            // Ensure proper spacing
+                            autoSkip: false,
+                            maxRotation: 0,
+                            minRotation: 0
+                        }
+                    }
+                }
+            };
+        }
+
+        // Load transactions
+        function loadTransactions(filter = 'all') {
+            const tbody = document.getElementById('transactions-body');
+            tbody.innerHTML = '';
+
+            let transactions = financialData.transactions;
+
+            if (filter === 'income') {
+                transactions = transactions.filter(t => t.type === 'income');
+            } else if (filter === 'expense') {
+                transactions = transactions.filter(t => t.type === 'expense');
+            }
+
+            // Sort by date (newest first)
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            transactions.forEach(transaction => {
+                const tr = document.createElement('tr');
+
+                // Format date
+                const date = new Date(transaction.date);
+                const formattedDate = date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+                // Format amount
+                const amountFormatted = '\u20B9' + transaction.amount.toLocaleString('en-IN');
+
+                tr.innerHTML = `
+                    <td>${formattedDate}</td>
+                    <td>${transaction.description}</td>
+                    <td><span class="category-badge ${transaction.category}">${capitalizeFirstLetter(transaction.category)}</span></td>
+                    <td class="amount-${transaction.type}">${transaction.type === 'income' ? '+' : '-'}${amountFormatted}</td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Load loan offers
+        function loadLoanOffers() {
+            const loanGrid = document.getElementById('loan-offers');
+            loanGrid.innerHTML = '';
+
+            financialData.loanOffers.forEach(offer => {
+                const card = document.createElement('div');
+                card.className = 'loan-card';
+                card.dataset.id = offer.id;
+
+                card.innerHTML = `
+                    <div class="loan-header">
+                        <h3>${offer.name}</h3>
+                        <p>${offer.bank}</p>
+                    </div>
+                    <div class="loan-body">
+                        <div class="loan-meta">
+                            <span>Term: ${offer.term}</span>
+                            <span>Max: ${offer.maxAmount}</span>
+                        </div>
+                        <div class="loan-rate">${offer.rate}%</div>
+                        <p>${offer.description}</p>
+                    </div>
+                    <div class="loan-footer">
+                        <button class="btn btn-primary apply-loan-btn" data-id="${offer.id}">Apply Now</button>
+                    </div>
+                `;
+
+                loanGrid.appendChild(card);
+            });
+
+            // Add event listeners to apply buttons
+            document.querySelectorAll('.apply-loan-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const loanId = this.dataset.id;
+                    const loan = financialData.loanOffers.find(l => l.id == loanId);
+                    openLoanApplicationModal(loan);
+                });
+            });
+        }
+
+        // Calculate net profit
+        function calculateNetProfit() {
+            // Calculate total income from transactions
+            const totalIncome = financialData.transactions
+                .filter(t => t.type === 'income')
+                .reduce((sum, t) => sum + t.amount, 0);
+
+            // Calculate total expense from transactions
+            const totalExpense = financialData.transactions
+                .filter(t => t.type === 'expense')
+                .reduce((sum, t) => sum + t.amount, 0);
+
+            // Update the financialData object
+            financialData.income = totalIncome;
+            financialData.expense = totalExpense;
+
+            // Calculate net profit
+            const netProfit = totalIncome - totalExpense;
+
+            // Update the UI
+            document.getElementById('total-income').textContent = '\u20B9' + totalIncome.toLocaleString('en-IN');
+            document.getElementById('total-expense').textContent = '\u20B9' + totalExpense.toLocaleString('en-IN');
+            document.getElementById('net-profit').textContent = '\u20B9' + netProfit.toLocaleString('en-IN');
+        }
+
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Time period selector
+            document.getElementById('time-period').addEventListener('change', function () {
+                initCharts(this.value);
+            });
+
+            // Transaction filter
+            document.getElementById('transaction-filter').addEventListener('change', function () {
+                loadTransactions(this.value);
+            });
+
+            // Add transaction button
+            document.getElementById('add-transaction-btn').addEventListener('click', function () {
+                document.getElementById('transaction-modal').style.display = 'block';
+            });
+
+            // Transaction form submission
+            document.getElementById('transaction-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                addTransaction();
+            });
+
+            // Loan calculator
+            document.getElementById('loanAmount').addEventListener('input', calculateLoan);
+            document.getElementById('interestRate').addEventListener('input', calculateLoan);
+            document.getElementById('loanTerm').addEventListener('input', calculateLoan);
+            document.getElementById('paymentFrequency').addEventListener('change', calculateLoan);
+
+            // Clear calculator
+            document.getElementById('clear-calculator').addEventListener('click', function () {
+                document.getElementById('loanAmount').value = '';
+                document.getElementById('interestRate').value = '';
+                document.getElementById('loanTerm').value = '';
+                document.getElementById('paymentFrequency').value = '12';
+                document.getElementById('periodicPayment').textContent = '\u20B90';
+                document.getElementById('totalInterest').textContent = '\u20B90';
+                document.getElementById('totalPayment').textContent = '\u20B90';
+            });
+
+            // Find more loans button
+            document.getElementById('find-more-loans').addEventListener('click', function () {
+                alert('Redirecting to loan marketplace...');
+            });
+
+            // Modal close buttons
+            document.querySelectorAll('.close').forEach(button => {
+                button.addEventListener('click', function () {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function (event) {
+                if (event.target.className === 'modal') {
+                    event.target.style.display = 'none';
+                }
+            });
+
+            // Loan application form
+            document.getElementById('loan-application-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                submitLoanApplication();
+            });
+
+            // Chart type buttons
+            document.querySelectorAll('[data-chart]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('[data-chart]').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentChartType = this.dataset.chart;
+                    initCharts(document.getElementById('time-period').value);
+                });
+            });
+
+            // Breakdown type buttons
+            document.querySelectorAll('[data-breakdown]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('[data-breakdown]').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentBreakdownType = this.dataset.breakdown;
+
+                    // Reinitialize breakdown chart
+                    if (breakdownChart) breakdownChart.destroy();
+                    const breakdownCtx = document.getElementById('breakdownChart').getContext('2d');
+                    breakdownChart = new Chart(breakdownCtx, getBreakdownChartConfig(currentBreakdownType));
+                });
+            });
+        }
+
+        // Calculate loan payments
+        function calculateLoan() {
+            const amount = parseFloat(document.getElementById('loanAmount').value);
+            const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+            const term = parseFloat(document.getElementById('loanTerm').value);
+            const frequency = parseInt(document.getElementById('paymentFrequency').value);
+
+            if (isNaN(amount) || isNaN(rate) || isNaN(term)) {
+                return;
+            }
+
+            const periodicRate = rate / frequency;
+            const totalPayments = term * frequency;
+
+            // Calculate periodic payment
+            const periodicPayment = (amount * periodicRate) / (1 - Math.pow(1 + periodicRate, -totalPayments));
+
+            // Calculate total payment and interest
+            const totalPayment = periodicPayment * totalPayments;
+            const totalInterest = totalPayment - amount;
+
+            // Update results
+            document.getElementById('periodicPayment').textContent = '\u20B9' + periodicPayment.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+            document.getElementById('totalInterest').textContent = '\u20B9' + totalInterest.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+            document.getElementById('totalPayment').textContent = '\u20B9' + totalPayment.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+        }
+
+        // Add new transaction
+        function addTransaction() {
+            const type = document.getElementById('transaction-type').value;
+            const amount = parseFloat(document.getElementById('transaction-amount').value);
+            const description = document.getElementById('transaction-description').value;
+            const category = document.getElementById('transaction-category').value;
+            const date = document.getElementById('transaction-date').value;
+
+            // Create new transaction object
+            const newTransaction = {
+                id: financialData.transactions.length + 1,
+                date: date,
+                description: description,
+                category: category,
+                amount: amount,
+                type: type
+            };
+
+            // Add to transactions array
+            financialData.transactions.unshift(newTransaction);
+
+            // Update financial data
+            if (type === 'income') {
+                financialData.income += amount;
+                document.getElementById('total-income').textContent = '\u20B9' + financialData.income.toLocaleString('en-IN');
+
+                // Update income sources percentages (simplified example)
+                if (category === 'agriculture') financialData.incomeSources.agriculture += 2;
+                else if (category === 'livestock') financialData.incomeSources.livestock += 2;
+                else if (category === 'equipment') financialData.incomeSources.equipment += 2;
+                else if (category === 'household') financialData.incomeSources.household += 2;
+                else financialData.incomeSources.other += 2;
+            } else {
+                financialData.expense += amount;
+                document.getElementById('total-expense').textContent = '\u20B9' + financialData.expense.toLocaleString('en-IN');
+
+                // Update expense categories percentages (simplified example)
+                if (category === 'agriculture') financialData.expenseCategories.agriculture += 2;
+                else if (category === 'livestock') financialData.expenseCategories.livestock += 2;
+                else if (category === 'equipment') financialData.expenseCategories.equipment += 2;
+                else if (category === 'household') financialData.expenseCategories.household += 2;
+                else financialData.expenseCategories.other += 2;
+            }
+
+            // Recalculate net profit
+            calculateNetProfit();
+
+            // Reload transactions
+            const currentFilter = document.getElementById('transaction-filter').value;
+            loadTransactions(currentFilter);
+
+            // Reinitialize charts to reflect new data
+            initCharts(document.getElementById('time-period').value);
+
+            // Close modal and reset form
+            document.getElementById('transaction-modal').style.display = 'none';
+            document.getElementById('transaction-form').reset();
+
+            // Set default date to today
+            document.getElementById('transaction-date').valueAsDate = new Date();
+
+            // Show success message
+            alert('Transaction added successfully!');
+        }
+
+        // Open loan application modal
+        function openLoanApplicationModal(loan) {
+            document.getElementById('loan-modal-title').textContent = `Apply for ${loan.name}`;
+            document.getElementById('loan-type').value = loan.name;
+            document.getElementById('loan-bank').value = loan.bank;
+            document.getElementById('loan-rate').value = loan.rate;
+
+            // Pre-fill loan amount with max amount if available
+            const maxAmount = parseFloat(loan.maxAmount.replace(/[^0-9.]/g, ''));
+            if (!isNaN(maxAmount)) {
+                document.getElementById('loan-amount-apply').placeholder = `Up to ${loan.maxAmount}`;
+            }
+
+            document.getElementById('loan-modal').style.display = 'block';
+        }
+
+        // Submit loan application
+        function submitLoanApplication() {
+            const name = document.getElementById('applicant-name').value;
+            const email = document.getElementById('applicant-email').value;
+            const phone = document.getElementById('applicant-phone').value;
+            const amount = document.getElementById('loan-amount-apply').value;
+            const purpose = document.getElementById('loan-purpose').value;
+            const loanType = document.getElementById('loan-type').value;
+            const bank = document.getElementById('loan-bank').value;
+            const rate = document.getElementById('loan-rate').value;
+
+            // In a real app, this would send the data to a server
+            console.log('Loan Application Submitted:', {
+                name,
+                email,
+                phone,
+                amount,
+                purpose,
+                loanType,
+                bank,
+                rate
+            });
+
+            // Close modal and reset form
+            document.getElementById('loan-modal').style.display = 'none';
+            document.getElementById('loan-application-form').reset();
+
+            // Show success message
+            alert('Loan application submitted successfully! A representative will contact you soon.');
+        }
+
+        // Helper function to capitalize first letter
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+</body>
+
+</html>

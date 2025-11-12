@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Fodder Forecast | Gaongotha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #1a7f4e;
+            --dark-green: #0d3b22;
+            --light-green: #e8f5e9;
+            --accent: #ff7a3d;
+            --white: #ffffff;
+            --light-gray: #f8faf9;
+            --dark-text: #1a2e22;
+            --card-shadow: 0 10px 30px rgba(26, 127, 78, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .management-container {
+            width: 100%;
+            max-width: 700px; /* Reduced width */
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: var(--dark-green);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--dark-green);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(26, 127, 78, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .cattle-info {
+            margin-top: 20px;
+        }
+        
+        .record-entry {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+        
+        .record-entry h4 {
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .record-form {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        /* Feed Management */
+        .feed-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .feed-header h4 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .season-selector {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .season-btn {
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .season-btn.active {
+            background: var(--primary-green);
+            color: white;
+        }
+        
+        .feed-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .feed-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feed-name {
+            color: var(--dark-green);
+        }
+        
+        /* Action buttons grid */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Photo display */
+        .photo-display {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .photo-display i {
+            font-size: 2rem;
+            color: #ddd;
+        }
+        
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-item div:first-child {
+            font-size: 0.9rem;
+            color: var(--dark-green);
+            margin-bottom: 5px;
+        }
+        
+        .cattle-info-text {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .management-container {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .season-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="management-container">
+        <div class="section-header">
+            <h2>Manage Your Cattle</h2>
+        </div>
+        
+        <div class="form-group">
+            <label for="cattleSelect">Select Cattle</label>
+            <select id="cattleSelect" class="form-control">
+                <option value="">-- Select your cattle --</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
+        
+        <div class="cattle-info" id="cattleInfoDisplay">
+            <div class="photo-display" id="cattlePhotoDisplay">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div class="cattle-info-text">
+                <h3 style="color: var(--dark-green); margin-bottom: 5px;">Please select cattle</h3>
+                <p style="color: var(--dark-text); opacity: 0.8;">Details will appear here</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div>Health Status</div>
+                    <div id="healthStatus">---</div>
+                </div>
+                <div class="info-item">
+                    <div>Milk Production</div>
+                    <div id="milkProductionDisplay">---</div>
+                </div>
+                <div class="info-item">
+                    <div>Breeding Status</div>
+                    <div id="breedingStatus">---</div>
+                </div>
+                <div class="info-item">
+                    <div>Last Record</div>
+                    <div id="lastRecord">---</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-outline" id="addMilkBtn">
+                <i class="fas fa-wine-bottle"></i> Milk Record
+            </button>
+            <button class="btn btn-outline" id="addHealthBtn">
+                <i class="fas fa-heartbeat"></i> Health Record
+            </button>
+            <button class="btn btn-outline" id="addBreedingBtn">
+                <i class="fas fa-venus-mars"></i> Breeding Record
+            </button>
+            <button class="btn btn-primary" id="viewFullProfileBtn">
+                <i class="fas fa-user"></i> Full Profile
+            </button>
+        </div>
+        
+        <!-- Record Entry Sections -->
+        <div class="record-entry" id="milkRecordEntry">
+            <h4><i class="fas fa-wine-bottle"></i> Milk Record</h4>
+            <form class="record-form" id="milkRecordForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="milkDate">Date</label>
+                        <input type="date" id="milkDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="milkAmount">Amount (liters)</label>
+                        <input type="number" step="0.1" id="milkAmount" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="milkFat">Fat %</label>
+                        <input type="number" step="0.1" id="milkFat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="milkTime">Time</label>
+                        <select id="milkTime" required>
+                            <option value="morning">Morning</option>
+                            <option value="evening">Evening</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="milkNotes">Notes</label>
+                    <textarea id="milkNotes"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-outline" onclick="closeRecordEntry('milk')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="record-entry" id="healthRecordEntry">
+            <h4><i class="fas fa-heartbeat"></i> Health Record</h4>
+            <form class="record-form" id="healthRecordForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="healthDate">Date</label>
+                        <input type="date" id="healthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="healthType">Type</label>
+                        <select id="healthType" required>
+                            <option value="">Select</option>
+                            <option value="vaccine">Vaccination</option>
+                            <option value="medicine">Medicine</option>
+                            <option value="checkup">Checkup</option>
+                            <option value="treatment">Treatment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="healthDetails">Details</label>
+                        <input type="text" id="healthDetails" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="healthVet">Veterinarian</label>
+                        <input type="text" id="healthVet">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="healthNotes">Notes</label>
+                    <textarea id="healthNotes"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-outline" onclick="closeRecordEntry('health')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="record-entry" id="breedingRecordEntry">
+            <h4><i class="fas fa-venus-mars"></i> Breeding Record</h4>
+            <form class="record-form" id="breedingRecordForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="breedingDate">Date</label>
+                        <input type="date" id="breedingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="breedingType">Type</label>
+                        <select id="breedingType" required>
+                            <option value="">Select</option>
+                            <option value="heat">Heat</option>
+                            <option value="ai">Artificial Insemination</option>
+                            <option value="natural">Natural Breeding</option>
+                            <option value="pregnancy">Pregnancy Confirmation</option>
+                            <option value="calving">Calving</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="breedingDetails">Details</label>
+                    <input type="text" id="breedingDetails">
+                </div>
+                <div class="form-group">
+                    <label for="breedingNotes">Notes</label>
+                    <textarea id="breedingNotes"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn btn-outline" onclick="closeRecordEntry('breeding')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Feed Management Section -->
+        <div class="feed-section">
+            <div class="feed-header">
+                <h4><i class="fas fa-seedling"></i> Feed Management</h4>
+                <div class="season-selector">
+                    <button class="season-btn active" onclick="changeSeason('summer')">Summer</button>
+                    <button class="season-btn" onclick="changeSeason('winter')">Winter</button>
+                    <button class="season-btn" onclick="changeSeason('monsoon')">Monsoon</button>
+                </div>
+            </div>
+            
+            <div class="feed-item">
+                <span class="feed-name">Green Fodder</span>
+                <span id="greenFodder">3 kg/day</span>
+            </div>
+            <div class="feed-item">
+                <span class="feed-name">Dry Fodder</span>
+                <span id="dryFodder">2 kg/day</span>
+            </div>
+            <div class="feed-item">
+                <span class="feed-name">Grains</span>
+                <span id="grains">1.5 kg/day</span>
+            </div>
+            <div class="feed-item">
+                <span class="feed-name">Mineral Mix</span>
+                <span id="minerals">50 gm/day</span>
+            </div>
+            <div class="feed-item">
+                <span class="feed-name">Water</span>
+                <span id="water">50-60 liters/day</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCattle = null;
+        let currentSeason = 'summer';
+
+        // Initialize when DOM is loaded
+        document.addEventListener("DOMContentLoaded", async function() {
+            await loadCattleData();
+            setupEventListeners();
+        });
+
+        // Load cattle data from database
+        async function loadCattleData() {
+            try {
+                const response = await fetch('/api/animals');
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error);
+                }
+
+                // Populate cattle select dropdown
+                const cattleSelect = document.getElementById("cattleSelect");
+                cattleSelect.innerHTML = '<option value="">-- Select your cattle --</option>';
+                
+                data.animals.forEach(animal => {
+                    const option = document.createElement("option");
+                    option.value = animal.id;
+                    option.textContent = `${animal.name} (ID: ${animal.id})`;
+                    cattleSelect.appendChild(option);
+                });
+            } catch (error) {
+                alert("Error loading cattle data: " + error.message);
+            }
+        }
+
+        function setupEventListeners() {
+            const cattleSelect = document.getElementById("cattleSelect");
+            cattleSelect.addEventListener("change", showRelatedInputs);
+            
+            document.getElementById("addMilkBtn").addEventListener("click", function() {
+                if (!currentCattle) {
+                    alert("Please select cattle first");
+                    return;
+                }
+                document.getElementById("milkRecordEntry").style.display = "block";
+                document.getElementById('milkDate').value = new Date().toISOString().split('T')[0];
+            });
+
+            document.getElementById("addHealthBtn").addEventListener("click", function() {
+                if (!currentCattle) {
+                    alert("Please select cattle first");
+                    return;
+                }
+                document.getElementById("healthRecordEntry").style.display = "block";
+                document.getElementById('healthDate').value = new Date().toISOString().split('T')[0];
+            });
+
+            document.getElementById("addBreedingBtn").addEventListener("click", function() {
+                if (!currentCattle) {
+                    alert("Please select cattle first");
+                    return;
+                }
+                document.getElementById("breedingRecordEntry").style.display = "block";
+                document.getElementById('breedingDate').value = new Date().toISOString().split('T')[0];
+            });
+
+            document.getElementById("viewFullProfileBtn").addEventListener("click", viewFullProfile);
+
+            // Form submissions
+            document.getElementById("milkRecordForm").addEventListener("submit", submitMilkRecord);
+            document.getElementById("healthRecordForm").addEventListener("submit", submitHealthRecord);
+            document.getElementById("breedingRecordForm").addEventListener("submit", submitBreedingRecord);
+        }
+
+        async function submitMilkRecord(e) {
+            e.preventDefault();
+            if (!currentCattle) return;
+
+            try {
+                const formData = {
+                    production_date: document.getElementById('milkDate').value,
+                    amount: parseFloat(document.getElementById('milkAmount').value),
+                    fat_content: parseFloat(document.getElementById('milkFat').value),
+                    time_of_day: document.getElementById('milkTime').value,
+                    notes: document.getElementById('milkNotes').value
+                };
+
+                const response = await fetch(`/api/animals/${currentCattle.id}/milk-production`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (!data.success) {
+                    throw new Error(data.error);
+                }
+
+                alert("Milk production record saved");
+                closeRecordEntry('milk');
+                await loadAnimalDetails(currentCattle.id);
+            } catch (error) {
+                alert("Error saving milk record: " + error.message);
+            }
+        }
+
+        async function submitHealthRecord(e) {
+            e.preventDefault();
+            if (!currentCattle) return;
+
+            try {
+                const formData = {
+                    checkup_date: document.getElementById('healthDate').value,
+                    health_issue: document.getElementById('healthDetails').value,
+                    vaccination: document.getElementById('healthType').value === 'vaccine' ? document.getElementById('healthDetails').value : null,
+                    treatment: document.getElementById('healthType').value === 'treatment' ? document.getElementById('healthDetails').value : null,
+                    vet_name: document.getElementById('healthVet').value,
+                    notes: document.getElementById('healthNotes').value
+                };
+
+                const response = await fetch(`/api/animals/${currentCattle.id}/health-record`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (!data.success) {
+                    throw new Error(data.error);
+                }
+
+                alert("Health record saved");
+                closeRecordEntry('health');
+                await loadAnimalDetails(currentCattle.id);
+            } catch (error) {
+                alert("Error saving health record: " + error.message);
+            }
+        }
+
+        async function submitBreedingRecord(e) {
+            e.preventDefault();
+            if (!currentCattle) return;
+
+            try {
+                const formData = {
+                    record_date: document.getElementById('breedingDate').value,
+                    status: document.getElementById('breedingType').value,
+                    method: document.getElementById('breedingType').value === 'ai' ? 'artificial' : 'natural',
+                    details: document.getElementById('breedingDetails').value,
+                    notes: document.getElementById('breedingNotes').value
+                };
+
+                const response = await fetch(`/api/animals/${currentCattle.id}/breeding-record`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (!data.success) {
+                    throw new Error(data.error);
+                }
+
+                alert("Breeding record saved");
+                closeRecordEntry('breeding');
+                await loadAnimalDetails(currentCattle.id);
+            } catch (error) {
+                alert("Error saving breeding record: " + error.message);
+            }
+        }
+
+        async function showRelatedInputs() {
+            const cattleSelect = document.getElementById("cattleSelect");
+            const selectedId = cattleSelect.value;
+
+            if (selectedId) {
+                await loadAnimalDetails(selectedId);
+            } else {
+                currentCattle = null;
+                resetCattleInfo();
+            }
+        }
+
+        async function loadAnimalDetails(animalId) {
+            try {
+                const [animalResponse, healthResponse] = await Promise.all([
+                    fetch(`/api/animals/${animalId}`),
+                    fetch(`/api/animals/${animalId}/health`)
+                ]);
+
+                const [animalData, healthData] = await Promise.all([
+                    animalResponse.json(),
+                    healthResponse.json()
+                ]);
+
+                if (!animalData.success || !healthData.success) {
+                    throw new Error("Failed to load animal details");
+                }
+
+                currentCattle = animalData.data;
+                const animal = currentCattle;
+                const health = healthData.data;
+
+                // Update basic info display
+                document.querySelector('#cattleInfoDisplay h3').textContent = animal.name;
+                document.querySelector('#cattleInfoDisplay p').textContent = 
+                    `ID: ${animal.id} | Breed: ${animal.breed} | Age: ${animal.age} months`;
+
+                // Update milk production display
+                document.getElementById('milkProductionDisplay').textContent = animal.milk_production ?
+                    `${animal.milk_production} liters/day` : '---';
+
+                // Update breeding status
+                document.getElementById('breedingStatus').textContent = animal.has_horns ? 'Has horns' : 'No horns';
+
+                // Update health status
+                document.getElementById('healthStatus').textContent = health.overall_status;
+
+                // Update last record
+                document.getElementById('lastRecord').textContent = health.record_date || 'No records';
+
+                // Update photo display
+                const photoEl = document.getElementById("cattlePhotoDisplay");
+                if (animal.image_filename) {
+                    photoEl.innerHTML = `<img src="/static/images/animals/${animal.image_filename}" style="width: 100%; height: 100%; object-fit: cover;">`;
+                } else {
+                    photoEl.innerHTML = `<i class="fas fa-camera" style="font-size: 2rem; color: #ddd;"></i>`;
+                }
+
+                // Show/hide relevant buttons based on animal type
+                document.getElementById('addMilkBtn').style.display = 
+                    (animal.type === 'Cow' || animal.type === 'Buffalo') ? 'flex' : 'none';
+                document.getElementById('addBreedingBtn').style.display = 
+                    (animal.type === 'Cow' || animal.type === 'Buffalo' || animal.type === 'Bull') ? 'flex' : 'none';
+
+                // Update feed plan
+                updateFeedPlan();
+
+            } catch (error) {
+                alert("Error loading animal details: " + error.message);
+                resetCattleInfo();
+            }
+        }
+
+        // Change season for feed management
+        function changeSeason(season) {
+            currentSeason = season;
+
+            // Update active button
+            document.querySelectorAll('.season-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(season)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update feed recommendations based on season
+            updateFeedPlan();
+        }
+
+        // Update feed plan based on cattle and season
+        function updateFeedPlan() {
+            if (!currentCattle) return;
+
+            let baseFeed = {
+                green: 3,
+                dry: 2,
+                grain: 1.5,
+                mineral: 50,
+                water: 50,
+                milk: 0
+            };
+
+            // Adjust for cattle type
+            if (currentCattle.type === 'Buffalo') {
+                baseFeed.green += 1;
+                baseFeed.grain += 0.5;
+                baseFeed.water += 10;
+            } else if (currentCattle.type === 'Calf') {
+                // Special feed for calves including milk
+                baseFeed.green = 1;
+                baseFeed.dry = 1;
+                baseFeed.grain = 0.5;
+                baseFeed.mineral = 25;
+                baseFeed.water = 15;
+                baseFeed.milk = 4;
+            }
+
+            // Adjust for pregnancy
+            if (currentCattle.isPregnant) {
+                baseFeed.grain += 0.5;
+                baseFeed.mineral += 10;
+            }
+
+            // Adjust for lactation
+            if (currentCattle.isLactating) {
+                baseFeed.green += 1;
+                baseFeed.grain += 1;
+                baseFeed.mineral += 10;
+                baseFeed.water += 10;
+            }
+
+            // Adjust for season
+            if (currentSeason === 'summer') {
+                baseFeed.water += 10;
+                baseFeed.green -= 0.5;
+            } else if (currentSeason === 'winter') {
+                baseFeed.dry += 1;
+                baseFeed.grain += 0.5;
+            } else if (currentSeason === 'monsoon') {
+                baseFeed.green += 1;
+                baseFeed.dry -= 0.5;
+            }
+
+            // Update display
+            document.getElementById('greenFodder').textContent = `${baseFeed.green} kg/day`;
+            document.getElementById('dryFodder').textContent = `${baseFeed.dry} kg/day`;
+            document.getElementById('grains').textContent = `${baseFeed.grain} kg/day`;
+            document.getElementById('minerals').textContent = `${baseFeed.mineral} gm/day`;
+            document.getElementById('water').textContent = `${baseFeed.water}-${baseFeed.water + 10} liters/day`;
+
+            // Add or update milk feed item for calves
+            let milkItem = document.getElementById('milkFeedItem');
+            if (currentCattle.type === 'Calf') {
+                if (!milkItem) {
+                    milkItem = document.createElement('div');
+                    milkItem.className = 'feed-item';
+                    milkItem.id = 'milkFeedItem';
+                    milkItem.innerHTML = `
+                        <span class="feed-name">Milk</span>
+                        <span id="milkFeed">${baseFeed.milk} liters/day</span>
+                    `;
+                    document.querySelector('.feed-section').appendChild(milkItem);
+                } else {
+                    document.getElementById('milkFeed').textContent = `${baseFeed.milk} liters/day`;
+                }
+            } else if (milkItem) {
+                // Remove milk item if not a calf
+                milkItem.remove();
+            }
+        }
+
+        // Close record entry form
+        function closeRecordEntry(type) {
+            document.getElementById(`${type}RecordEntry`).style.display = 'none';
+            document.getElementById(`${type}RecordForm`).reset();
+        }
+
+        // Reset cattle information
+        function resetCattleInfo() {
+            const cattleInfoDisplay = document.getElementById('cattleInfoDisplay');
+            cattleInfoDisplay.querySelector('h3').textContent = 'Please select cattle';
+            cattleInfoDisplay.querySelector('p').textContent = 'Details will appear here';
+            document.getElementById('healthStatus').textContent = '---';
+            document.getElementById('milkProductionDisplay').textContent = '---';
+            document.getElementById('breedingStatus').textContent = '---';
+            document.getElementById('lastRecord').textContent = '---';
+
+            const photoDisplay = document.getElementById('cattlePhotoDisplay');
+            photoDisplay.innerHTML = '';
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-camera';
+            icon.style.fontSize = '2rem';
+            icon.style.color = '#ddd';
+            photoDisplay.appendChild(icon);
+        }
+
+        // View full profile
+        function viewFullProfile() {
+            if (!currentCattle) {
+                alert("Please select cattle first");
+                return;
+            }
+
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.right = '0';
+            modal.style.bottom = '0';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.zIndex = '100';
+
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.borderRadius = '10px';
+            modalContent.style.width = '90%';
+            modalContent.style.maxWidth = '600px';
+            modalContent.style.maxHeight = '90vh';
+            modalContent.style.overflowY = 'auto';
+            modalContent.style.padding = '30px';
+            modalContent.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+            modalContent.style.position = 'relative';
+
+            // Add close button
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close-modal';
+            closeBtn.innerHTML = '&times;';
+            closeBtn.style.background = 'none';
+            closeBtn.style.border = 'none';
+            closeBtn.style.fontSize = '1.5rem';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.color = '#999';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.top = '10px';
+            closeBtn.style.right = '10px';
+            closeBtn.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+            modalContent.appendChild(closeBtn);
+
+            // Determine animal type name
+            let typeName = '';
+            if (currentCattle.type === 'Cow') typeName = 'Cow';
+            else if (currentCattle.type === 'Buffalo') typeName = 'Buffalo';
+            else if (currentCattle.type === 'Ox') typeName = 'Ox';
+
+            // Create HTML content for the modal
+            let profileHtml = `
+                <h2 style="color: var(--dark-green); margin-bottom: 1rem; border-bottom: 2px solid var(--primary-green); padding-bottom: 0.5rem; text-align: center;">
+                    ${currentCattle.name} (ID: ${currentCattle.id})
+                </h2>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1.5rem;">
+                    <div style="width: 120px; height: 120px; border-radius: 8px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px;">
+            `;
+
+            const imgPath = currentCattle.image_filename ? `/static/images/${currentCattle.image_filename}` : '';
+            if (imgPath) {
+                profileHtml += `<img src="${imgPath}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            } else {
+                profileHtml += `<i class="fas fa-camera" style="font-size: 2.5rem; color: #ddd;"></i>`;
+            }
+
+            profileHtml += `
+                    </div>
+                    
+                    <div style="width: 100%;">
+                        <p style="margin-bottom: 8px;"><strong>Type:</strong> ${typeName}</p>
+                        <p style="margin-bottom: 8px;"><strong>Breed:</strong> ${currentCattle.breed || '---'}</p>
+                        <p style="margin-bottom: 8px;"><strong>Age:</strong> ${currentCattle.age || '---'} months</p>
+                        <p style="margin-bottom: 8px;"><strong>Milk Production:</strong> ${currentCattle.milk_production || '---'} liters/day</p>
+                        <p style="margin-bottom: 8px;"><strong>Horns:</strong> ${currentCattle.has_horns ? 'Yes' : 'No'}</p>
+                        <p style="margin-bottom: 8px;"><strong>Registration Date:</strong> ${currentCattle.created_at || '---'}</p>
+                    </div>
+                </div>
+            `;
+
+            modalContent.innerHTML += profileHtml;
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            // Close modal when clicking outside content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
