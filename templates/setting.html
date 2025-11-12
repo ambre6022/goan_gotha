@@ -433,6 +433,12 @@
                             <span>Billing</span>
                         </a>
                     </li>
+                    <li class="setting-nav-item">
+                        <a href="{{ url_for('logout') }}" class="setting-nav-link" style="color: #c0392b;">
+                            <i class="fas fa-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             
@@ -608,13 +614,19 @@
         // Navigation between setting sections
         settingNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
+                const href = (link.getAttribute('href') || '').trim();
+                // Allow real navigation (e.g., Logout) and only intercept in-page links
+                if (href && href !== '#') {
+                    return; // do not prevent default; let browser navigate
+                }
+
                 e.preventDefault();
                 const targetSection = link.textContent.trim().toLowerCase();
-                
+
                 // Update active states
                 settingNavLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
-                
+
                 // Show/hide relevant sections
                 settingSections.forEach(section => {
                     if (section.id === targetSection) {

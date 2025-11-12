@@ -45,9 +45,7 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if get_current_user_id():
-        return redirect(url_for('dashboard', user_id=get_current_user_id()))
-        
+    # Always render login page on GET; allow switching accounts even if already logged in
     form = LoginForm()
     signup_form = SignupForm()
     
