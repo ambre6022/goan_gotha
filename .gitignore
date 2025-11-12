@@ -1,0 +1,51 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment variables
+.env
+*.env
+
+# SQLite database files
+*.sqlite3
+*.db
+
+# Log files
+*.log
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# macOS / Windows System Files
+.DS_Store
+Thumbs.db
+
+# Node modules (if frontend uses npm)
+node_modules/
+
+# Build / Dist folders
+dist/
+build/
+
+# Cache
+.cache/
+*.tmp
+
+# Compiled static files
+*.min.js
+*.min.css
+
+# Uploaded or static media (optional)
+media/
+uploads/
+
+# Python backup files
+*.bak
+*.old
